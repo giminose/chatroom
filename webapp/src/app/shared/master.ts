@@ -4,5 +4,5 @@ import { Hardware } from "./hardware";
 
 export interface Master extends Hardware {
   bus: BUS;
-  addressViews: Array<AddressRegion>;
+  masterViews: Array<AddressRegion>;
 }

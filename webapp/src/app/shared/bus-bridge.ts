@@ -1,3 +1,2 @@
-export class BusBridge {
 
-}
+export class BusBridge {}

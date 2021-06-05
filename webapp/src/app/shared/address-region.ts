@@ -1,10 +1,10 @@
 export class AddressRegion {
-  start: number;
-  end: number;
+  start: string;
+  end: string;
 
   constructor(options: {
-    start: number;
-    end: number;
+    start: string;
+    end: string;
   }) {
     this.start = options.start;
     this.end = options.end;

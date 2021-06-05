@@ -1,0 +1,949 @@
+{
+  "topSystem": {
+    "bus": [
+      {
+        "type": "bus",
+        "master": [
+          {
+            "type": "cpu",
+            "id": "cpu_0",
+            "name": "top_cpu"
+          }
+        ],
+        "slave": [
+          {
+            "type": "memory",
+            "id": "mem_0",
+            "name": "top_ddr"
+          }
+        ],
+        "id": "bus_0",
+        "name": "top_bus"
+      }
+    ],
+    "devices": [
+      {
+        "type": "cpu",
+        "id": "cpu_0",
+        "name": "top_cpu",
+        "bus": {
+          "type": "bus",
+          "master": [
+            {
+              "type": "cpu",
+              "id": "cpu_0",
+              "name": "top_cpu"
+            }
+          ],
+          "slave": [
+            {
+              "type": "memory",
+              "id": "mem_0",
+              "name": "top_ddr"
+            }
+          ],
+          "id": "bus_0",
+          "name": "top_bus"
+        },
+        "masterViews": [
+          {
+            "start": "0x00000000",
+            "end": "0xFFFFFFFF"
+          }
+        ]
+      },
+      {
+        "type": "memory",
+        "id": "mem_0",
+        "name": "top_ddr",
+        "slaveLocates": [
+          {
+            "start": "0x80000000",
+            "end": "0xFFFFFFFF"
+          }
+        ],
+        "bus": {
+          "type": "bus",
+          "master": [
+            {
+              "type": "cpu",
+              "id": "cpu_0",
+              "name": "top_cpu"
+            }
+          ],
+          "slave": [
+            {
+              "type": "memory",
+              "id": "mem_0",
+              "name": "top_ddr"
+            }
+          ],
+          "id": "bus_0",
+          "name": "top_bus"
+        }
+      }
+    ]
+  },
+  "subSystem1": {
+    "bus": [
+      {
+        "type": "bus",
+        "master": [
+          {
+            "type": "cpu",
+            "id": "cpu_1",
+            "name": "s1_cpu"
+          },
+          {
+            "type": "device",
+            "id": "dev_0",
+            "name": "s1_eng_1_a"
+          },
+          {
+            "type": "device",
+            "id": "dev_1",
+            "name": "s1_eng_2_a"
+          }
+        ],
+        "slave": [
+          {
+            "type": "memory",
+            "id": "mem_1",
+            "name": "s1_buf_a"
+          },
+          {
+            "type": "memory",
+            "id": "mem_2",
+            "name": "s1_buf_b"
+          },
+          {
+            "type": "memory",
+            "id": "mem_5",
+            "name": "s1_ddr"
+          },
+          {
+            "type": "device",
+            "id": "dev_0",
+            "name": "s1_eng_1_a"
+          },
+          {
+            "type": "device",
+            "id": "dev_1",
+            "name": "s1_eng_2_a"
+          }
+        ],
+        "id": "bus_1",
+        "name": "s1_bus"
+      }
+    ],
+    "devices": [
+      {
+        "type": "cpu",
+        "id": "cpu_1",
+        "name": "s1_cpu",
+        "bus": {
+          "type": "bus",
+          "master": [
+            {
+              "type": "cpu",
+              "id": "cpu_1",
+              "name": "s1_cpu"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "slave": [
+            {
+              "type": "memory",
+              "id": "mem_1",
+              "name": "s1_buf_a"
+            },
+            {
+              "type": "memory",
+              "id": "mem_2",
+              "name": "s1_buf_b"
+            },
+            {
+              "type": "memory",
+              "id": "mem_5",
+              "name": "s1_ddr"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "id": "bus_1",
+          "name": "s1_bus"
+        },
+        "masterViews": [
+          {
+            "start": "0x00000000",
+            "end": "0xFFFFFFFF"
+          }
+        ]
+      },
+      {
+        "type": "device",
+        "slaveLocates": [
+          {
+            "start": "0x00A00000",
+            "end": "0x00A03FFF"
+          }
+        ],
+        "id": "dev_0",
+        "name": "s1_eng_1_a",
+        "bus": {
+          "type": "bus",
+          "master": [
+            {
+              "type": "cpu",
+              "id": "cpu_1",
+              "name": "s1_cpu"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "slave": [
+            {
+              "type": "memory",
+              "id": "mem_1",
+              "name": "s1_buf_a"
+            },
+            {
+              "type": "memory",
+              "id": "mem_2",
+              "name": "s1_buf_b"
+            },
+            {
+              "type": "memory",
+              "id": "mem_5",
+              "name": "s1_ddr"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "id": "bus_1",
+          "name": "s1_bus"
+        },
+        "masterViews": [
+          {
+            "start": "0x000FFFFF",
+            "end": "0x001FFFFF"
+          },
+          {
+            "start": "0xC0000000",
+            "end": "0xFFFFFFFF"
+          }
+        ]
+      },
+      {
+        "type": "device",
+        "slaveLocates": [
+          {
+            "start": "0x00A04000",
+            "end": "0x00A07FFF"
+          }
+        ],
+        "id": "dev_1",
+        "name": "s1_eng_2_a",
+        "bus": {
+          "type": "bus",
+          "master": [
+            {
+              "type": "cpu",
+              "id": "cpu_1",
+              "name": "s1_cpu"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "slave": [
+            {
+              "type": "memory",
+              "id": "mem_1",
+              "name": "s1_buf_a"
+            },
+            {
+              "type": "memory",
+              "id": "mem_2",
+              "name": "s1_buf_b"
+            },
+            {
+              "type": "memory",
+              "id": "mem_5",
+              "name": "s1_ddr"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "id": "bus_1",
+          "name": "s1_bus"
+        },
+        "masterViews": [
+          {
+            "start": "0x000FFFFF",
+            "end": "0x001FFFFF"
+          }
+        ]
+      },
+      {
+        "type": "memory",
+        "id": "mem_1",
+        "name": "s1_buf_a",
+        "slaveLocates": [
+          {
+            "start": "0x00000000",
+            "end": "0x000FFFFF"
+          }
+        ],
+        "bus": {
+          "type": "bus",
+          "master": [
+            {
+              "type": "cpu",
+              "id": "cpu_1",
+              "name": "s1_cpu"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "slave": [
+            {
+              "type": "memory",
+              "id": "mem_1",
+              "name": "s1_buf_a"
+            },
+            {
+              "type": "memory",
+              "id": "mem_2",
+              "name": "s1_buf_b"
+            },
+            {
+              "type": "memory",
+              "id": "mem_5",
+              "name": "s1_ddr"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "id": "bus_1",
+          "name": "s1_bus"
+        }
+      },
+      {
+        "type": "memory",
+        "id": "mem_2",
+        "name": "s1_buf_b",
+        "slaveLocates": [
+          {
+            "start": "0x00100000",
+            "end": "0x001FFFFF"
+          }
+        ],
+        "bus": {
+          "type": "bus",
+          "master": [
+            {
+              "type": "cpu",
+              "id": "cpu_1",
+              "name": "s1_cpu"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "slave": [
+            {
+              "type": "memory",
+              "id": "mem_1",
+              "name": "s1_buf_a"
+            },
+            {
+              "type": "memory",
+              "id": "mem_2",
+              "name": "s1_buf_b"
+            },
+            {
+              "type": "memory",
+              "id": "mem_5",
+              "name": "s1_ddr"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "id": "bus_1",
+          "name": "s1_bus"
+        }
+      },
+      {
+        "type": "memory",
+        "id": "mem_5",
+        "name": "s1_ddr",
+        "slaveLocates": [
+          {
+            "start": "0xC0000000",
+            "end": "0xFFFFFFFF"
+          }
+        ],
+        "bus": {
+          "type": "bus",
+          "master": [
+            {
+              "type": "cpu",
+              "id": "cpu_1",
+              "name": "s1_cpu"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "slave": [
+            {
+              "type": "memory",
+              "id": "mem_1",
+              "name": "s1_buf_a"
+            },
+            {
+              "type": "memory",
+              "id": "mem_2",
+              "name": "s1_buf_b"
+            },
+            {
+              "type": "memory",
+              "id": "mem_5",
+              "name": "s1_ddr"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "id": "bus_1",
+          "name": "s1_bus"
+        }
+      }
+    ]
+  },
+  "subSystem2": {
+    "bus": [
+      {
+        "type": "bus",
+        "master": [
+          {
+            "type": "cpu",
+            "id": "cpu_2",
+            "name": "s2_cpu"
+          },
+          {
+            "type": "device",
+            "id": "dev_0",
+            "name": "s1_eng_1_a"
+          },
+          {
+            "type": "device",
+            "id": "dev_1",
+            "name": "s1_eng_2_a"
+          }
+        ],
+        "slave": [
+          {
+            "type": "memory",
+            "id": "mem_6",
+            "name": "s2_buf_a"
+          },
+          {
+            "type": "memory",
+            "id": "mem_7",
+            "name": "s2_buf_b"
+          },
+          {
+            "type": "memory",
+            "id": "mem_10",
+            "name": "s2_ddr"
+          },
+          {
+            "type": "device",
+            "id": "dev_0",
+            "name": "s1_eng_1_a"
+          },
+          {
+            "type": "device",
+            "id": "dev_1",
+            "name": "s1_eng_2_a"
+          }
+        ],
+        "id": "bus_2",
+        "name": "s2_bus"
+      }
+    ],
+    "devices": [
+      {
+        "type": "cpu",
+        "id": "cpu_2",
+        "name": "s2_cpu",
+        "bus": {
+          "type": "bus",
+          "master": [
+            {
+              "type": "cpu",
+              "id": "cpu_2",
+              "name": "s2_cpu"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "slave": [
+            {
+              "type": "memory",
+              "id": "mem_6",
+              "name": "s2_buf_a"
+            },
+            {
+              "type": "memory",
+              "id": "mem_7",
+              "name": "s2_buf_b"
+            },
+            {
+              "type": "memory",
+              "id": "mem_10",
+              "name": "s2_ddr"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "id": "bus_2",
+          "name": "s2_bus"
+        },
+        "masterViews": [
+          {
+            "start": "0x00000000",
+            "end": "0xFFFFFFFF"
+          }
+        ]
+      },
+      {
+        "type": "device",
+        "slaveLocates": [
+          {
+            "start": "0x00A00000",
+            "end": "0x00A03FFF"
+          }
+        ],
+        "id": "dev_0",
+        "name": "s1_eng_1_a",
+        "bus": {
+          "type": "bus",
+          "master": [
+            {
+              "type": "cpu",
+              "id": "cpu_2",
+              "name": "s2_cpu"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "slave": [
+            {
+              "type": "memory",
+              "id": "mem_6",
+              "name": "s2_buf_a"
+            },
+            {
+              "type": "memory",
+              "id": "mem_7",
+              "name": "s2_buf_b"
+            },
+            {
+              "type": "memory",
+              "id": "mem_10",
+              "name": "s2_ddr"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "id": "bus_2",
+          "name": "s2_bus"
+        },
+        "masterViews": [
+          {
+            "start": "0x000FFFFF",
+            "end": "0x001FFFFF"
+          },
+          {
+            "start": "0xC0000000",
+            "end": "0xFFFFFFFF"
+          }
+        ]
+      },
+      {
+        "type": "device",
+        "slaveLocates": [
+          {
+            "start": "0x00A04000",
+            "end": "0x00A07FFF"
+          }
+        ],
+        "id": "dev_1",
+        "name": "s1_eng_2_a",
+        "bus": {
+          "type": "bus",
+          "master": [
+            {
+              "type": "cpu",
+              "id": "cpu_2",
+              "name": "s2_cpu"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "slave": [
+            {
+              "type": "memory",
+              "id": "mem_6",
+              "name": "s2_buf_a"
+            },
+            {
+              "type": "memory",
+              "id": "mem_7",
+              "name": "s2_buf_b"
+            },
+            {
+              "type": "memory",
+              "id": "mem_10",
+              "name": "s2_ddr"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "id": "bus_2",
+          "name": "s2_bus"
+        },
+        "masterViews": [
+          {
+            "start": "0x000FFFFF",
+            "end": "0x001FFFFF"
+          }
+        ]
+      },
+      {
+        "type": "memory",
+        "id": "mem_6",
+        "name": "s2_buf_a",
+        "slaveLocates": [
+          {
+            "start": "0x00000000",
+            "end": "0x000FFFFF"
+          }
+        ],
+        "bus": {
+          "type": "bus",
+          "master": [
+            {
+              "type": "cpu",
+              "id": "cpu_2",
+              "name": "s2_cpu"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "slave": [
+            {
+              "type": "memory",
+              "id": "mem_6",
+              "name": "s2_buf_a"
+            },
+            {
+              "type": "memory",
+              "id": "mem_7",
+              "name": "s2_buf_b"
+            },
+            {
+              "type": "memory",
+              "id": "mem_10",
+              "name": "s2_ddr"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "id": "bus_2",
+          "name": "s2_bus"
+        }
+      },
+      {
+        "type": "memory",
+        "id": "mem_7",
+        "name": "s2_buf_b",
+        "slaveLocates": [
+          {
+            "start": "0x00100000",
+            "end": "0x001FFFFF"
+          }
+        ],
+        "bus": {
+          "type": "bus",
+          "master": [
+            {
+              "type": "cpu",
+              "id": "cpu_2",
+              "name": "s2_cpu"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "slave": [
+            {
+              "type": "memory",
+              "id": "mem_6",
+              "name": "s2_buf_a"
+            },
+            {
+              "type": "memory",
+              "id": "mem_7",
+              "name": "s2_buf_b"
+            },
+            {
+              "type": "memory",
+              "id": "mem_10",
+              "name": "s2_ddr"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "id": "bus_2",
+          "name": "s2_bus"
+        }
+      },
+      {
+        "type": "memory",
+        "id": "mem_10",
+        "name": "s2_ddr",
+        "slaveLocates": [
+          {
+            "start": "0xC0000000",
+            "end": "0xFFFFFFFF"
+          }
+        ],
+        "bus": {
+          "type": "bus",
+          "master": [
+            {
+              "type": "cpu",
+              "id": "cpu_2",
+              "name": "s2_cpu"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "slave": [
+            {
+              "type": "memory",
+              "id": "mem_6",
+              "name": "s2_buf_a"
+            },
+            {
+              "type": "memory",
+              "id": "mem_7",
+              "name": "s2_buf_b"
+            },
+            {
+              "type": "memory",
+              "id": "mem_10",
+              "name": "s2_ddr"
+            },
+            {
+              "type": "device",
+              "id": "dev_0",
+              "name": "s1_eng_1_a"
+            },
+            {
+              "type": "device",
+              "id": "dev_1",
+              "name": "s1_eng_2_a"
+            }
+          ],
+          "id": "bus_2",
+          "name": "s2_bus"
+        }
+      }
+    ]
+  }
+}

@@ -7,18 +7,18 @@ export class CPU implements Master {
   id: string;
   name: string;
   bus: BUS;
-  addressViews: Array<AddressRegion>;
+  masterViews: Array<AddressRegion>;
 
   constructor(options: {
     id: string;
     name: string;
     bus: BUS;
-    addressViews: Array<AddressRegion>;
+    masterViews: Array<AddressRegion>;
   }) {
     this.id = options.id;
     this.name = options.name
     this.bus = options.bus;
-    this.addressViews = options.addressViews;
+    this.masterViews = options.masterViews;
     options.bus.addMaster({type: this.type, id: options.id, name: options.name});
   }
 }
