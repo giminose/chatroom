@@ -4,8 +4,8 @@ export class BUS implements Hardware {
   type: string = 'bus';
   id: string;
   name: string;
-  master: Array<Hardware> = [];
-  slave: Array<Hardware> = [];
+  masterIDs: string[] = [];
+  slaveIDs: string[] = [];
   constructor(options: {
     id: string;
     name: string;
@@ -15,10 +15,14 @@ export class BUS implements Hardware {
   }
 
   addMaster(hw: Hardware) {
-    this.master.push(hw);
+    if (!this.masterIDs.find(v => v == hw.id)) {
+      this.masterIDs.push(hw.id)
+    }
   }
 
   addSlave(hw: Hardware) {
-    this.slave.push(hw)
+    if (!this.slaveIDs.find(v => v == hw.id)) {
+      this.slaveIDs.push(hw.id)
+    }
   }
 }

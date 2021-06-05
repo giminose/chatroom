@@ -7,7 +7,7 @@ import { CPU } from './shared/cpu';
 import { AddressRegion } from './shared/address-region';
 import { Device } from './shared/device';
 import { Memory } from './shared/memory';
-import { SingleCoreSystem } from './shared/system';
+import { SingleCoreSystem } from './shared/single-core-system';
 
 @Component({
   selector: 'app-root',
@@ -125,10 +125,10 @@ export class AppComponent implements OnInit {
     const s1BufB = new Memory({id: 'mem_2', name: 's1_buf_b', bus: s1BUS, slaveLocates: [arSubBufB]});
     const s1DDR = new Memory({id: 'mem_5', name: 's1_ddr', bus: s1BUS, slaveLocates: [arSubDDR]});
     const eng1A = new Device({id: 'dev_0', name: 's1_eng_1_a', bus: s1BUS, masterViews: [arEngView, arSubDDR]});
-    eng1A.asSlave(arEngAReg);
+    eng1A.asSlave(arEngAReg, s1BUS);
     s1BUS.addSlave({type: eng1A.type, id: eng1A.id, name:eng1A.name});
     const eng1B = new Device({id: 'dev_1', name: 's1_eng_2_a', bus: s1BUS, masterViews: [arEngView]});
-    eng1B.asSlave(arEngBReg);
+    eng1B.asSlave(arEngBReg, s1BUS);
     s1BUS.addSlave({type: eng1B.type, id: eng1B.id, name:eng1B.name});
 
     const s2CPU = new CPU({id: 'cpu_2', name:'s2_cpu', bus: s2BUS, masterViews: [arDDR]});
@@ -136,29 +136,21 @@ export class AppComponent implements OnInit {
     const s2BufB = new Memory({id: 'mem_7', name: 's2_buf_b', bus: s2BUS, slaveLocates: [arSubBufB]});
     const s2DDR = new Memory({id: 'mem_10', name: 's2_ddr', bus: s2BUS, slaveLocates: [arSubDDR]});
     const eng2A = new Device({id: 'dev_0', name: 's1_eng_1_a', bus: s2BUS, masterViews: [arEngView, arSubDDR]});
-    eng2A.asSlave(arEngAReg);
+    eng2A.asSlave(arEngAReg, s2BUS);
     s2BUS.addSlave({type: eng2A.type, id: eng2A.id, name:eng2A.name});
     const eng2B = new Device({id: 'dev_1', name: 's1_eng_2_a', bus: s2BUS, masterViews: [arEngView]});
-    eng2B.asSlave(arEngBReg);
+    eng2B.asSlave(arEngBReg, s2BUS);
     s2BUS.addSlave({type: eng2B.type, id: eng2B.id, name:eng2B.name});
 
-    const topSystem = new SingleCoreSystem();
-    topSystem.bus.push(topBUS);
-    topSystem.devices.push(topCPU, topDDR);
+    const topSystem = new SingleCoreSystem({id: 'system_0', name: 'top_system'});
+    topSystem.addHardwares([topBUS, topCPU, topDDR]);
 
-    const subSystem1 = new SingleCoreSystem();
-    subSystem1.bus.push(s1BUS);
-    subSystem1.devices.push(s1CPU, eng1A, eng1B, s1BufA, s1BufB, s1DDR);
+    const subSystem1 = new SingleCoreSystem({id: 'system_1', name: 'sub_system_1'});
+    subSystem1.addHardwares([s1BUS, s1CPU, eng1A, eng1B, s1BufA, s1BufB, s1DDR]);
 
-    const subSystem2 = new SingleCoreSystem();
-    subSystem2.bus.push(s2BUS);
-    subSystem2.devices.push(s2CPU, eng2A, eng2B, s2BufA, s2BufB, s2DDR);
-    this.greetings.push(JSON.stringify(
-      {
-        topSystem: topSystem,
-        subSystem1: subSystem1,
-        subSystem2: subSystem2
-      }
-    ));
+    const subSystem2 = new SingleCoreSystem({id: 'system_2', name: 'sub_system_2'});
+    subSystem2.addHardwares([s2BUS, s2CPU, eng2A, eng2B, s2BufA, s2BufB, s2DDR]);
+
+    this.greetings.push(JSON.stringify([topSystem, subSystem1, subSystem2]));
   }
 }
