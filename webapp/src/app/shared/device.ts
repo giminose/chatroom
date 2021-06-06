@@ -1,37 +1,30 @@
 import { AddressRegion } from "./address-region";
-import { BUS } from "./bus";
+import { BusAddressMap } from "./bus-address-map";
 import { Hardware } from "./hardware";
-import { Master } from "./master";
-import { Memory } from "./memory";
-import { Slave } from "./slave";
 
-export class Device implements Master, Slave {
+export class Device implements Hardware {
   type = 'device'
   id: string;
   name: string;
-  masterViews: {
-    busID: string;
-    addressViews: AddressRegion[];
-  };
-  slaveLocates: Array<AddressRegion> = [];
+  masterView?: BusAddressMap;
+  slaveLocate?: AddressRegion;
 
   constructor(options: {
     id: string;
     name: string;
-    bus: BUS;
-    masterViews: Array<AddressRegion>;
+    masterView?: BusAddressMap;
+    slaveLocate?: BusAddressMap;
   }) {
     this.id = options.id;
     this.name = options.name;
-    this.masterViews = {
-      busID: options.bus.id,
-      addressViews: options.masterViews
+    if (options.masterView != null) {
+      this.masterView = options.masterView;
+      options.masterView.bus.addMaster(this);
     }
-    options.bus.addMaster(this);
+    if (options.slaveLocate != null) {
+      this.slaveLocate = options.slaveLocate.address[0];
+      options.slaveLocate.bus.addSlave(this);
+    }
   }
 
-  asSlave(memory: AddressRegion, bus: BUS) {
-    this.slaveLocates.push(memory);
-    bus.addSlave(this)
-  }
 }

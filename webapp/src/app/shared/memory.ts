@@ -1,22 +1,20 @@
 import { AddressRegion } from "./address-region";
-import { BUS } from "./bus";
+import { BusAddressMap } from "./bus-address-map";
 import { Hardware } from "./hardware";
-import { Slave } from "./slave";
 
-export class Memory implements Slave {
+export class Memory implements Hardware {
   type: string = 'memory';
   id: string;
   name: string;
-  slaveLocates: Array<AddressRegion>;
+  slaveLocate: AddressRegion;
   constructor(options: {
     id: string;
     name: string;
-    bus: BUS;
-    slaveLocates: Array<AddressRegion>;
+    busAddress: BusAddressMap;
   }) {
     this.id = options.id;
     this.name = options.name;
-    this.slaveLocates = options.slaveLocates;
-    options.bus.addSlave({type: this.type, id: options.id, name: options.name});
+    this.slaveLocate = options.busAddress.address[0];
+    options.busAddress.bus.addSlave(this);
   }
 }

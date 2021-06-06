@@ -1,27 +1,20 @@
-import { AddressRegion } from "./address-region";
-import { BUS } from "./bus";
-import { Master } from "./master";
-
-export class CPU implements Master {
+import { BusAddressMap } from "./bus-address-map";
+import { Hardware } from "./hardware";
+export class CPU implements Hardware{
   type = 'cpu';
   id: string;
   name: string;
-  masterViews: {
-    busID: string;
-    addressViews: AddressRegion[];
-  };
+  masterView: BusAddressMap;
+
   constructor(options: {
     id: string;
     name: string;
-    bus: BUS;
-    masterViews: Array<AddressRegion>;
+    busAddress: BusAddressMap
   }) {
     this.id = options.id;
     this.name = options.name
-    this.masterViews = {
-      busID: options.bus.id,
-      addressViews: options.masterViews
-    }
-    options.bus.addMaster(this);
+    this.masterView = options.busAddress;
+    this.masterView.bus.addMaster(this);
   }
+
 }

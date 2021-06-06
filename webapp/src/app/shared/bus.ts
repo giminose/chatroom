@@ -4,8 +4,8 @@ export class BUS implements Hardware {
   type: string = 'bus';
   id: string;
   name: string;
-  masterIDs: string[] = [];
-  slaveIDs: string[] = [];
+  masters: Hardware[] = [];
+  slaves: Hardware[] = [];
   constructor(options: {
     id: string;
     name: string;
@@ -15,14 +15,22 @@ export class BUS implements Hardware {
   }
 
   addMaster(hw: Hardware) {
-    if (!this.masterIDs.find(v => v == hw.id)) {
-      this.masterIDs.push(hw.id)
+    if (!this.masters.find(v => v.id == hw.id)) {
+      this.masters.push({
+        type: hw.type,
+        id: hw.id,
+        name: hw.name
+      });
     }
   }
 
   addSlave(hw: Hardware) {
-    if (!this.slaveIDs.find(v => v == hw.id)) {
-      this.slaveIDs.push(hw.id)
+    if (!this.slaves.find(v => v.id == hw.id)) {
+      this.slaves.push({
+        type: hw.type,
+        id: hw.id,
+        name: hw.name
+      });
     }
   }
 }
