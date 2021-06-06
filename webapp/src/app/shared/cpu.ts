@@ -1,7 +1,7 @@
 import { BusAddressMap } from "./bus-address-map";
 import { Hardware } from "./hardware";
 export class CPU implements Hardware{
-  type = 'cpu';
+  type = 'CPU';
   id: string;
   name: string;
   masterView: BusAddressMap;

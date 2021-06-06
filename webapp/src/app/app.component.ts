@@ -9,6 +9,10 @@ import { Device } from './shared/device';
 import { Memory } from './shared/memory';
 import { SingleCoreSystem } from './shared/single-core-system';
 import { BusAddressMap } from './shared/bus-address-map';
+import { BusBridgeSlave } from './shared/bus-bridge-slave';
+import { BusBridgeMaster } from './shared/bus-bridge-master';
+import { BusBridge } from './shared/bus-bridge';
+import { BusBridgeMapper } from './shared/bus-bridge-mapper';
 
 @Component({
   selector: 'app-root',
@@ -101,15 +105,6 @@ export class AppComponent implements OnInit {
     const s2BUS = new BUS({id: 'bus_2', name: 's2_bus'});
 
     const arDDR = new AddressRegion({start: '0x00000000', end: '0xFFFFFFFF'}); // 0~4G
-
-    const arT2S2BufA = new AddressRegion({start: '0x20000000', end: '0x200FFFFF'}); // 512M~513M
-    const arT2S2BufB = new AddressRegion({start: '0x20100000', end: '0x201FFFFF'}); // 513M~514M
-    const arT2S2DDR  = new AddressRegion({start: '0x60000000', end: '0x7FFFFFFF'}); // 1.5G~2G
-
-    const arT2S1BufA = new AddressRegion({start: '0x10000000', end: '0x100FFFFF'}); // 256M~257M
-    const arT2S1BufB = new AddressRegion({start: '0x10100000', end: '0x101FFFFF'}); // 257M~258M
-    const arT2S1DDR  = new AddressRegion({start: '0x40000000', end: '0x5FFFFFFF'}); // 1G~1.5G
-
     const arTopDDR   = new AddressRegion({start: '0x80000000', end: '0xFFFFFFFF'}); // 2G~4G
     const arEngView  = new AddressRegion({start: '0x000FFFFF', end: '0x001FFFFF'}); // 0~2M
     const arSubBufA  = new AddressRegion({start: '0x00000000', end: '0x000FFFFF'}); // 0M~1M
@@ -147,14 +142,64 @@ export class AppComponent implements OnInit {
       slaveLocate: new BusAddressMap({bus: s2BUS, address: [arEngBReg]}),
     });
 
+    const arT2S1BufA = new AddressRegion({start: '0x10000000', end: '0x100FFFFF'}); // 256M~257M
+    const arT2S1BufB = new AddressRegion({start: '0x10100000', end: '0x101FFFFF'}); // 257M~258M
+    const arT2S1DDR  = new AddressRegion({start: '0x40000000', end: '0x5FFFFFFF'}); // 1G~1.5G
+
+    const arT2S2BufA = new AddressRegion({start: '0x20000000', end: '0x200FFFFF'}); // 512M~513M
+    const arT2S2BufB = new AddressRegion({start: '0x20100000', end: '0x201FFFFF'}); // 513M~514M
+    const arT2S2DDR  = new AddressRegion({start: '0x60000000', end: '0x7FFFFFFF'}); // 1.5G~2G
+
+    const t2s1BBSlaveBufA = new BusBridgeSlave({id: 'bb_slave_0', name: 't2s1_bufa', slaveLocate: arT2S1BufA});
+    const t2s1BBSlaveBufB = new BusBridgeSlave({id: 'bb_slave_1', name: 't2s1_bufb', slaveLocate: arT2S1BufB});
+    const t2s1BBSlaveDDR =  new BusBridgeSlave({id: 'bb_slave_2', name: 't2s1_ddr',  slaveLocate: arT2S1DDR});
+
+    const t2s2BBSlaveBufA = new BusBridgeSlave({id: 'bb_slave_3', name: 't2s2_bufa', slaveLocate: arT2S2BufA});
+    const t2s2BBSlaveBufB = new BusBridgeSlave({id: 'bb_slave_4', name: 't2s2_bufb', slaveLocate: arT2S2BufB});
+    const t2s2BBSlaveDDR =  new BusBridgeSlave({id: 'bb_slave_5', name: 't2s2_ddr',  slaveLocate: arT2S2DDR});
+
+    const t2s1BBMaster = new BusBridgeMaster({id: 'bb_master_0', name: 't2s1_master',
+      busAddress: new BusAddressMap({bus: s1BUS, address: [arSubBufA, arSubBufB, arSubDDR]})
+    });
+
+    const t2s2BBMaster = new BusBridgeMaster({id: 'bb_master_1', name: 't2s2_master',
+      busAddress: new BusAddressMap({bus: s1BUS, address: [arSubBufA, arSubBufB, arSubDDR]})
+    });
+
+    const t2s1BBMapper1 = new BusBridgeMapper(t2s1BBMaster, t2s1BBSlaveBufA);
+    const t2s1BBMapper2 = new BusBridgeMapper(t2s1BBMaster, t2s1BBSlaveBufB);
+    const t2s1BBMapper3 = new BusBridgeMapper(t2s1BBMaster, t2s1BBSlaveDDR);
+
+    const t2s2BBMapper1 = new BusBridgeMapper(t2s2BBMaster, t2s2BBSlaveBufA);
+    const t2s2BBMapper2 = new BusBridgeMapper(t2s2BBMaster, t2s2BBSlaveBufB);
+    const t2s2BBMapper3 = new BusBridgeMapper(t2s2BBMaster, t2s2BBSlaveDDR);
+
+    const t2s1 = new BusBridge({
+      id: 'bb_0', name: 't2s1',
+      masters: [t2s1BBMaster], slaves: [t2s1BBSlaveBufA, t2s1BBSlaveBufB, t2s1BBSlaveDDR],
+      mapper: [t2s1BBMapper1, t2s1BBMapper2, t2s1BBMapper3]
+    });
+
+    topBUS.addSlave(t2s1);
+    s1BUS.addMaster(t2s1);
+
+    const t2s2 = new BusBridge({
+      id: 'bb_1', name: 't2s2',
+      masters: [t2s2BBMaster], slaves: [t2s2BBSlaveBufA, t2s2BBSlaveBufB, t2s2BBSlaveDDR],
+      mapper: [t2s2BBMapper1, t2s2BBMapper2, t2s2BBMapper3]
+    });
+
+    topBUS.addSlave(t2s1);
+    s2BUS.addMaster(t2s1);
+
     const topSystem = new SingleCoreSystem({id: 'system_0', name: 'top_system'});
-    topSystem.addHardwares([topBUS, topCPU, topDDR]);
+    topSystem.addHardwares([topBUS, topCPU, topDDR, t2s1, t2s2]);
 
     const subSystem1 = new SingleCoreSystem({id: 'system_1', name: 'sub_system_1'});
-    subSystem1.addHardwares([s1BUS, s1CPU, eng1A, eng1B, s1BufA, s1BufB, s1DDR]);
+    subSystem1.addHardwares([s1BUS, s1CPU, eng1A, eng1B, s1BufA, s1BufB, s1DDR, t2s1]);
 
     const subSystem2 = new SingleCoreSystem({id: 'system_2', name: 'sub_system_2'});
-    subSystem2.addHardwares([s2BUS, s2CPU, eng2A, eng2B, s2BufA, s2BufB, s2DDR]);
+    subSystem2.addHardwares([s2BUS, s2CPU, eng2A, eng2B, s2BufA, s2BufB, s2DDR, t2s2]);
 
     this.greetings.push(JSON.stringify([topSystem, subSystem1, subSystem2]));
   }

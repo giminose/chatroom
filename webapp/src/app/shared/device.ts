@@ -3,7 +3,7 @@ import { BusAddressMap } from "./bus-address-map";
 import { Hardware } from "./hardware";
 
 export class Device implements Hardware {
-  type = 'device'
+  type = 'DEVICE'
   id: string;
   name: string;
   masterView?: BusAddressMap;
@@ -26,5 +26,4 @@ export class Device implements Hardware {
       options.slaveLocate.bus.addSlave(this);
     }
   }
-
 }

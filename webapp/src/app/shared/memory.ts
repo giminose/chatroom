@@ -3,7 +3,7 @@ import { BusAddressMap } from "./bus-address-map";
 import { Hardware } from "./hardware";
 
 export class Memory implements Hardware {
-  type: string = 'memory';
+  type: string = 'MEMORY';
   id: string;
   name: string;
   slaveLocate: AddressRegion;

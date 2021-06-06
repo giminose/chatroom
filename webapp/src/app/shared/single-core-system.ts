@@ -1,4 +1,5 @@
 import { BUS } from "./bus";
+import { BusBridge } from "./bus-bridge";
 import { CPU } from "./cpu";
 import { Device } from "./device";
 import { Hardware } from "./hardware";
@@ -11,6 +12,7 @@ export class SingleCoreSystem {
   cpu!: CPU;
   memories: Memory[] = [];
   devices: Device[] = [];
+  busBridges: BusBridge[] = [];
 
   constructor(options: {
     id: string;
@@ -21,18 +23,21 @@ export class SingleCoreSystem {
   }
 
   addHardwares(hwList: Hardware[]) {
-    hwList.forEach(v => {
-      if (v.type === 'bus') {
-        this.bus.push(<BUS>v);
+    hwList.forEach(hw => {
+      if (hw.type === 'BUS') {
+        this.bus.push(<BUS>hw);
       }
-      if (v.type === 'memory') {
-        this.memories.push(<Memory>v);
+      if (hw.type === 'MEMORY') {
+        this.memories.push(<Memory>hw);
       }
-      if (v.type === 'device') {
-        this.devices.push(<Device>v);
+      if (hw.type === 'DEVICE') {
+        this.devices.push(<Device>hw);
       }
-      if (v.type === 'cpu') {
-        this.cpu = <CPU>v;
+      if (hw.type === 'CPU') {
+        this.cpu = <CPU>hw;
+      }
+      if (hw.type === 'BUS_BRIDGE') {
+        this.busBridges.push(<BusBridge>hw);
       }
     })
   }

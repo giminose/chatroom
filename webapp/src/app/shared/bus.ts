@@ -1,7 +1,7 @@
 import { Hardware } from "./hardware";
 
 export class BUS implements Hardware {
-  type: string = 'bus';
+  type: string = 'BUS';
   id: string;
   name: string;
   masters: Hardware[] = [];
