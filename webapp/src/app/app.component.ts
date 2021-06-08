@@ -189,13 +189,13 @@ export class AppComponent implements OnInit {
     });
 
     const t2s2BBMaster1 = new BusBridgeMaster({id: 'bb_master_3', name: 't2s2_master',
-      busAddress: new BusAddressMap({bus: s1BUS, address: [arSubBufA]})
+      busAddress: new BusAddressMap({bus: s2BUS, address: [arSubBufA]})
     });
     const t2s2BBMaster2 = new BusBridgeMaster({id: 'bb_master_4', name: 't2s2_master',
-      busAddress: new BusAddressMap({bus: s1BUS, address: [arSubBufB]})
+      busAddress: new BusAddressMap({bus: s2BUS, address: [arSubBufB]})
     });
     const t2s2BBMaster3 = new BusBridgeMaster({id: 'bb_master_5', name: 't2s2_master',
-      busAddress: new BusAddressMap({bus: s1BUS, address: [arSubDDR]})
+      busAddress: new BusAddressMap({bus: s2BUS, address: [arSubDDR]})
     });
 
     const t2s1BBMapper1 = new BusBridgeMapper(t2s1BBMaster1, t2s1BBSlaveBufA);
