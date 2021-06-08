@@ -2,11 +2,11 @@ import { BusBridgeMaster } from "./bus-bridge-master";
 import { BusBridgeSlave } from "./bus-bridge-slave";
 
 export class BusBridgeMapper {
-  master: BusBridgeMaster;
-  slave: BusBridgeSlave;
+  master: string;
+  slave: string;
 
   constructor(master: BusBridgeMaster, slave: BusBridgeSlave) {
-    this.master = master;
-    this.slave = slave;
+    this.master = master.id;
+    this.slave = slave.id;
   }
 }

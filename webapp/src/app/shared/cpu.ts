@@ -14,7 +14,5 @@ export class CPU implements Hardware{
     this.id = options.id;
     this.name = options.name
     this.masterView = options.busAddress;
-    this.masterView.bus.addMaster(this);
   }
-
 }

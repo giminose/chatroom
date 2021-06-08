@@ -6,23 +6,12 @@
       {
         "type": "BUS",
         "masters": [
-          {
-            "type": "CPU",
-            "id": "cpu_0",
-            "name": "top_cpu"
-          }
+          "cpu_0"
         ],
         "slaves": [
-          {
-            "type": "MEMORY",
-            "id": "mem_0",
-            "name": "top_ddr"
-          },
-          {
-            "type": "BUS_BRIDGE",
-            "id": "bb_0",
-            "name": "t2s1"
-          }
+          "mem_0",
+          "bb_0",
+          "bb_1"
         ],
         "id": "bus_0",
         "name": "top_bus"
@@ -54,70 +43,35 @@
                 {
                   "start": "0x00000000",
                   "end": "0x000FFFFF"
-                },
+                }
+              ],
+              "bus": "bus_1"
+            }
+          },
+          {
+            "id": "bb_master_1",
+            "name": "t2s1_master",
+            "masterView": {
+              "address": [
                 {
                   "start": "0x00100000",
                   "end": "0x001FFFFF"
-                },
+                }
+              ],
+              "bus": "bus_1"
+            }
+          },
+          {
+            "id": "bb_master_2",
+            "name": "t2s1_master",
+            "masterView": {
+              "address": [
                 {
                   "start": "0xC0000000",
                   "end": "0xFFFFFFFF"
                 }
               ],
-              "bus": {
-                "type": "BUS",
-                "masters": [
-                  {
-                    "type": "CPU",
-                    "id": "cpu_1",
-                    "name": "s1_cpu"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_0",
-                    "name": "s1_eng1a"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_1",
-                    "name": "s1_eng2a"
-                  },
-                  {
-                    "type": "BUS_BRIDGE",
-                    "id": "bb_0",
-                    "name": "t2s1"
-                  }
-                ],
-                "slaves": [
-                  {
-                    "type": "MEMORY",
-                    "id": "mem_1",
-                    "name": "s1_bufa"
-                  },
-                  {
-                    "type": "MEMORY",
-                    "id": "mem_2",
-                    "name": "s1_bufb"
-                  },
-                  {
-                    "type": "MEMORY",
-                    "id": "mem_3",
-                    "name": "s1_ddr"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_0",
-                    "name": "s1_eng1a"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_1",
-                    "name": "s1_eng2a"
-                  }
-                ],
-                "id": "bus_1",
-                "name": "s1_bus"
-              }
+              "bus": "bus_1"
             }
           }
         ],
@@ -149,256 +103,16 @@
         ],
         "mapper": [
           {
-            "master": {
-              "id": "bb_master_0",
-              "name": "t2s1_master",
-              "masterView": {
-                "address": [
-                  {
-                    "start": "0x00000000",
-                    "end": "0x000FFFFF"
-                  },
-                  {
-                    "start": "0x00100000",
-                    "end": "0x001FFFFF"
-                  },
-                  {
-                    "start": "0xC0000000",
-                    "end": "0xFFFFFFFF"
-                  }
-                ],
-                "bus": {
-                  "type": "BUS",
-                  "masters": [
-                    {
-                      "type": "CPU",
-                      "id": "cpu_1",
-                      "name": "s1_cpu"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    },
-                    {
-                      "type": "BUS_BRIDGE",
-                      "id": "bb_0",
-                      "name": "t2s1"
-                    }
-                  ],
-                  "slaves": [
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_1",
-                      "name": "s1_bufa"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_2",
-                      "name": "s1_bufb"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_3",
-                      "name": "s1_ddr"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    }
-                  ],
-                  "id": "bus_1",
-                  "name": "s1_bus"
-                }
-              }
-            },
-            "slave": {
-              "id": "bb_slave_0",
-              "name": "t2s1_bufa",
-              "slaveLocate": {
-                "start": "0x10000000",
-                "end": "0x100FFFFF"
-              }
-            }
+            "master": "bb_master_0",
+            "slave": "bb_slave_0"
           },
           {
-            "master": {
-              "id": "bb_master_0",
-              "name": "t2s1_master",
-              "masterView": {
-                "address": [
-                  {
-                    "start": "0x00000000",
-                    "end": "0x000FFFFF"
-                  },
-                  {
-                    "start": "0x00100000",
-                    "end": "0x001FFFFF"
-                  },
-                  {
-                    "start": "0xC0000000",
-                    "end": "0xFFFFFFFF"
-                  }
-                ],
-                "bus": {
-                  "type": "BUS",
-                  "masters": [
-                    {
-                      "type": "CPU",
-                      "id": "cpu_1",
-                      "name": "s1_cpu"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    },
-                    {
-                      "type": "BUS_BRIDGE",
-                      "id": "bb_0",
-                      "name": "t2s1"
-                    }
-                  ],
-                  "slaves": [
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_1",
-                      "name": "s1_bufa"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_2",
-                      "name": "s1_bufb"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_3",
-                      "name": "s1_ddr"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    }
-                  ],
-                  "id": "bus_1",
-                  "name": "s1_bus"
-                }
-              }
-            },
-            "slave": {
-              "id": "bb_slave_1",
-              "name": "t2s1_bufb",
-              "slaveLocate": {
-                "start": "0x10100000",
-                "end": "0x101FFFFF"
-              }
-            }
+            "master": "bb_master_1",
+            "slave": "bb_slave_1"
           },
           {
-            "master": {
-              "id": "bb_master_0",
-              "name": "t2s1_master",
-              "masterView": {
-                "address": [
-                  {
-                    "start": "0x00000000",
-                    "end": "0x000FFFFF"
-                  },
-                  {
-                    "start": "0x00100000",
-                    "end": "0x001FFFFF"
-                  },
-                  {
-                    "start": "0xC0000000",
-                    "end": "0xFFFFFFFF"
-                  }
-                ],
-                "bus": {
-                  "type": "BUS",
-                  "masters": [
-                    {
-                      "type": "CPU",
-                      "id": "cpu_1",
-                      "name": "s1_cpu"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    },
-                    {
-                      "type": "BUS_BRIDGE",
-                      "id": "bb_0",
-                      "name": "t2s1"
-                    }
-                  ],
-                  "slaves": [
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_1",
-                      "name": "s1_bufa"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_2",
-                      "name": "s1_bufb"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_3",
-                      "name": "s1_ddr"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    }
-                  ],
-                  "id": "bus_1",
-                  "name": "s1_bus"
-                }
-              }
-            },
-            "slave": {
-              "id": "bb_slave_2",
-              "name": "t2s1_ddr",
-              "slaveLocate": {
-                "start": "0x40000000",
-                "end": "0x5FFFFFFF"
-              }
-            }
+            "master": "bb_master_2",
+            "slave": "bb_slave_2"
           }
         ]
       },
@@ -408,77 +122,42 @@
         "name": "t2s2",
         "masters": [
           {
-            "id": "bb_master_1",
+            "id": "bb_master_3",
             "name": "t2s2_master",
             "masterView": {
               "address": [
                 {
                   "start": "0x00000000",
                   "end": "0x000FFFFF"
-                },
+                }
+              ],
+              "bus": "bus_1"
+            }
+          },
+          {
+            "id": "bb_master_4",
+            "name": "t2s2_master",
+            "masterView": {
+              "address": [
                 {
                   "start": "0x00100000",
                   "end": "0x001FFFFF"
-                },
+                }
+              ],
+              "bus": "bus_1"
+            }
+          },
+          {
+            "id": "bb_master_5",
+            "name": "t2s2_master",
+            "masterView": {
+              "address": [
                 {
                   "start": "0xC0000000",
                   "end": "0xFFFFFFFF"
                 }
               ],
-              "bus": {
-                "type": "BUS",
-                "masters": [
-                  {
-                    "type": "CPU",
-                    "id": "cpu_1",
-                    "name": "s1_cpu"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_0",
-                    "name": "s1_eng1a"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_1",
-                    "name": "s1_eng2a"
-                  },
-                  {
-                    "type": "BUS_BRIDGE",
-                    "id": "bb_0",
-                    "name": "t2s1"
-                  }
-                ],
-                "slaves": [
-                  {
-                    "type": "MEMORY",
-                    "id": "mem_1",
-                    "name": "s1_bufa"
-                  },
-                  {
-                    "type": "MEMORY",
-                    "id": "mem_2",
-                    "name": "s1_bufb"
-                  },
-                  {
-                    "type": "MEMORY",
-                    "id": "mem_3",
-                    "name": "s1_ddr"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_0",
-                    "name": "s1_eng1a"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_1",
-                    "name": "s1_eng2a"
-                  }
-                ],
-                "id": "bus_1",
-                "name": "s1_bus"
-              }
+              "bus": "bus_1"
             }
           }
         ],
@@ -510,256 +189,16 @@
         ],
         "mapper": [
           {
-            "master": {
-              "id": "bb_master_1",
-              "name": "t2s2_master",
-              "masterView": {
-                "address": [
-                  {
-                    "start": "0x00000000",
-                    "end": "0x000FFFFF"
-                  },
-                  {
-                    "start": "0x00100000",
-                    "end": "0x001FFFFF"
-                  },
-                  {
-                    "start": "0xC0000000",
-                    "end": "0xFFFFFFFF"
-                  }
-                ],
-                "bus": {
-                  "type": "BUS",
-                  "masters": [
-                    {
-                      "type": "CPU",
-                      "id": "cpu_1",
-                      "name": "s1_cpu"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    },
-                    {
-                      "type": "BUS_BRIDGE",
-                      "id": "bb_0",
-                      "name": "t2s1"
-                    }
-                  ],
-                  "slaves": [
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_1",
-                      "name": "s1_bufa"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_2",
-                      "name": "s1_bufb"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_3",
-                      "name": "s1_ddr"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    }
-                  ],
-                  "id": "bus_1",
-                  "name": "s1_bus"
-                }
-              }
-            },
-            "slave": {
-              "id": "bb_slave_3",
-              "name": "t2s2_bufa",
-              "slaveLocate": {
-                "start": "0x20000000",
-                "end": "0x200FFFFF"
-              }
-            }
+            "master": "bb_master_3",
+            "slave": "bb_slave_3"
           },
           {
-            "master": {
-              "id": "bb_master_1",
-              "name": "t2s2_master",
-              "masterView": {
-                "address": [
-                  {
-                    "start": "0x00000000",
-                    "end": "0x000FFFFF"
-                  },
-                  {
-                    "start": "0x00100000",
-                    "end": "0x001FFFFF"
-                  },
-                  {
-                    "start": "0xC0000000",
-                    "end": "0xFFFFFFFF"
-                  }
-                ],
-                "bus": {
-                  "type": "BUS",
-                  "masters": [
-                    {
-                      "type": "CPU",
-                      "id": "cpu_1",
-                      "name": "s1_cpu"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    },
-                    {
-                      "type": "BUS_BRIDGE",
-                      "id": "bb_0",
-                      "name": "t2s1"
-                    }
-                  ],
-                  "slaves": [
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_1",
-                      "name": "s1_bufa"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_2",
-                      "name": "s1_bufb"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_3",
-                      "name": "s1_ddr"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    }
-                  ],
-                  "id": "bus_1",
-                  "name": "s1_bus"
-                }
-              }
-            },
-            "slave": {
-              "id": "bb_slave_4",
-              "name": "t2s2_bufb",
-              "slaveLocate": {
-                "start": "0x20100000",
-                "end": "0x201FFFFF"
-              }
-            }
+            "master": "bb_master_4",
+            "slave": "bb_slave_4"
           },
           {
-            "master": {
-              "id": "bb_master_1",
-              "name": "t2s2_master",
-              "masterView": {
-                "address": [
-                  {
-                    "start": "0x00000000",
-                    "end": "0x000FFFFF"
-                  },
-                  {
-                    "start": "0x00100000",
-                    "end": "0x001FFFFF"
-                  },
-                  {
-                    "start": "0xC0000000",
-                    "end": "0xFFFFFFFF"
-                  }
-                ],
-                "bus": {
-                  "type": "BUS",
-                  "masters": [
-                    {
-                      "type": "CPU",
-                      "id": "cpu_1",
-                      "name": "s1_cpu"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    },
-                    {
-                      "type": "BUS_BRIDGE",
-                      "id": "bb_0",
-                      "name": "t2s1"
-                    }
-                  ],
-                  "slaves": [
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_1",
-                      "name": "s1_bufa"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_2",
-                      "name": "s1_bufb"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_3",
-                      "name": "s1_ddr"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    }
-                  ],
-                  "id": "bus_1",
-                  "name": "s1_bus"
-                }
-              }
-            },
-            "slave": {
-              "id": "bb_slave_5",
-              "name": "t2s2_ddr",
-              "slaveLocate": {
-                "start": "0x60000000",
-                "end": "0x7FFFFFFF"
-              }
-            }
+            "master": "bb_master_5",
+            "slave": "bb_slave_5"
           }
         ]
       }
@@ -775,30 +214,7 @@
             "end": "0xFFFFFFFF"
           }
         ],
-        "bus": {
-          "type": "BUS",
-          "masters": [
-            {
-              "type": "CPU",
-              "id": "cpu_0",
-              "name": "top_cpu"
-            }
-          ],
-          "slaves": [
-            {
-              "type": "MEMORY",
-              "id": "mem_0",
-              "name": "top_ddr"
-            },
-            {
-              "type": "BUS_BRIDGE",
-              "id": "bb_0",
-              "name": "t2s1"
-            }
-          ],
-          "id": "bus_0",
-          "name": "top_bus"
-        }
+        "bus": "bus_0"
       }
     }
   },
@@ -809,53 +225,17 @@
       {
         "type": "BUS",
         "masters": [
-          {
-            "type": "CPU",
-            "id": "cpu_1",
-            "name": "s1_cpu"
-          },
-          {
-            "type": "DEVICE",
-            "id": "dev_0",
-            "name": "s1_eng1a"
-          },
-          {
-            "type": "DEVICE",
-            "id": "dev_1",
-            "name": "s1_eng2a"
-          },
-          {
-            "type": "BUS_BRIDGE",
-            "id": "bb_0",
-            "name": "t2s1"
-          }
+          "cpu_1",
+          "dev_0",
+          "dev_1",
+          "bb_0"
         ],
         "slaves": [
-          {
-            "type": "MEMORY",
-            "id": "mem_1",
-            "name": "s1_bufa"
-          },
-          {
-            "type": "MEMORY",
-            "id": "mem_2",
-            "name": "s1_bufb"
-          },
-          {
-            "type": "MEMORY",
-            "id": "mem_3",
-            "name": "s1_ddr"
-          },
-          {
-            "type": "DEVICE",
-            "id": "dev_0",
-            "name": "s1_eng1a"
-          },
-          {
-            "type": "DEVICE",
-            "id": "dev_1",
-            "name": "s1_eng2a"
-          }
+          "mem_1",
+          "mem_2",
+          "mem_3",
+          "dev_0",
+          "dev_1"
         ],
         "id": "bus_1",
         "name": "s1_bus"
@@ -906,60 +286,7 @@
               "end": "0xFFFFFFFF"
             }
           ],
-          "bus": {
-            "type": "BUS",
-            "masters": [
-              {
-                "type": "CPU",
-                "id": "cpu_1",
-                "name": "s1_cpu"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_0",
-                "name": "s1_eng1a"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_1",
-                "name": "s1_eng2a"
-              },
-              {
-                "type": "BUS_BRIDGE",
-                "id": "bb_0",
-                "name": "t2s1"
-              }
-            ],
-            "slaves": [
-              {
-                "type": "MEMORY",
-                "id": "mem_1",
-                "name": "s1_bufa"
-              },
-              {
-                "type": "MEMORY",
-                "id": "mem_2",
-                "name": "s1_bufb"
-              },
-              {
-                "type": "MEMORY",
-                "id": "mem_3",
-                "name": "s1_ddr"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_0",
-                "name": "s1_eng1a"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_1",
-                "name": "s1_eng2a"
-              }
-            ],
-            "id": "bus_1",
-            "name": "s1_bus"
-          }
+          "bus": "bus_1"
         },
         "slaveLocate": {
           "start": "0x00A00000",
@@ -977,60 +304,7 @@
               "end": "0x001FFFFF"
             }
           ],
-          "bus": {
-            "type": "BUS",
-            "masters": [
-              {
-                "type": "CPU",
-                "id": "cpu_1",
-                "name": "s1_cpu"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_0",
-                "name": "s1_eng1a"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_1",
-                "name": "s1_eng2a"
-              },
-              {
-                "type": "BUS_BRIDGE",
-                "id": "bb_0",
-                "name": "t2s1"
-              }
-            ],
-            "slaves": [
-              {
-                "type": "MEMORY",
-                "id": "mem_1",
-                "name": "s1_bufa"
-              },
-              {
-                "type": "MEMORY",
-                "id": "mem_2",
-                "name": "s1_bufb"
-              },
-              {
-                "type": "MEMORY",
-                "id": "mem_3",
-                "name": "s1_ddr"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_0",
-                "name": "s1_eng1a"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_1",
-                "name": "s1_eng2a"
-              }
-            ],
-            "id": "bus_1",
-            "name": "s1_bus"
-          }
+          "bus": "bus_1"
         },
         "slaveLocate": {
           "start": "0x00A04000",
@@ -1052,70 +326,35 @@
                 {
                   "start": "0x00000000",
                   "end": "0x000FFFFF"
-                },
+                }
+              ],
+              "bus": "bus_1"
+            }
+          },
+          {
+            "id": "bb_master_1",
+            "name": "t2s1_master",
+            "masterView": {
+              "address": [
                 {
                   "start": "0x00100000",
                   "end": "0x001FFFFF"
-                },
+                }
+              ],
+              "bus": "bus_1"
+            }
+          },
+          {
+            "id": "bb_master_2",
+            "name": "t2s1_master",
+            "masterView": {
+              "address": [
                 {
                   "start": "0xC0000000",
                   "end": "0xFFFFFFFF"
                 }
               ],
-              "bus": {
-                "type": "BUS",
-                "masters": [
-                  {
-                    "type": "CPU",
-                    "id": "cpu_1",
-                    "name": "s1_cpu"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_0",
-                    "name": "s1_eng1a"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_1",
-                    "name": "s1_eng2a"
-                  },
-                  {
-                    "type": "BUS_BRIDGE",
-                    "id": "bb_0",
-                    "name": "t2s1"
-                  }
-                ],
-                "slaves": [
-                  {
-                    "type": "MEMORY",
-                    "id": "mem_1",
-                    "name": "s1_bufa"
-                  },
-                  {
-                    "type": "MEMORY",
-                    "id": "mem_2",
-                    "name": "s1_bufb"
-                  },
-                  {
-                    "type": "MEMORY",
-                    "id": "mem_3",
-                    "name": "s1_ddr"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_0",
-                    "name": "s1_eng1a"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_1",
-                    "name": "s1_eng2a"
-                  }
-                ],
-                "id": "bus_1",
-                "name": "s1_bus"
-              }
+              "bus": "bus_1"
             }
           }
         ],
@@ -1147,256 +386,16 @@
         ],
         "mapper": [
           {
-            "master": {
-              "id": "bb_master_0",
-              "name": "t2s1_master",
-              "masterView": {
-                "address": [
-                  {
-                    "start": "0x00000000",
-                    "end": "0x000FFFFF"
-                  },
-                  {
-                    "start": "0x00100000",
-                    "end": "0x001FFFFF"
-                  },
-                  {
-                    "start": "0xC0000000",
-                    "end": "0xFFFFFFFF"
-                  }
-                ],
-                "bus": {
-                  "type": "BUS",
-                  "masters": [
-                    {
-                      "type": "CPU",
-                      "id": "cpu_1",
-                      "name": "s1_cpu"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    },
-                    {
-                      "type": "BUS_BRIDGE",
-                      "id": "bb_0",
-                      "name": "t2s1"
-                    }
-                  ],
-                  "slaves": [
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_1",
-                      "name": "s1_bufa"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_2",
-                      "name": "s1_bufb"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_3",
-                      "name": "s1_ddr"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    }
-                  ],
-                  "id": "bus_1",
-                  "name": "s1_bus"
-                }
-              }
-            },
-            "slave": {
-              "id": "bb_slave_0",
-              "name": "t2s1_bufa",
-              "slaveLocate": {
-                "start": "0x10000000",
-                "end": "0x100FFFFF"
-              }
-            }
+            "master": "bb_master_0",
+            "slave": "bb_slave_0"
           },
           {
-            "master": {
-              "id": "bb_master_0",
-              "name": "t2s1_master",
-              "masterView": {
-                "address": [
-                  {
-                    "start": "0x00000000",
-                    "end": "0x000FFFFF"
-                  },
-                  {
-                    "start": "0x00100000",
-                    "end": "0x001FFFFF"
-                  },
-                  {
-                    "start": "0xC0000000",
-                    "end": "0xFFFFFFFF"
-                  }
-                ],
-                "bus": {
-                  "type": "BUS",
-                  "masters": [
-                    {
-                      "type": "CPU",
-                      "id": "cpu_1",
-                      "name": "s1_cpu"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    },
-                    {
-                      "type": "BUS_BRIDGE",
-                      "id": "bb_0",
-                      "name": "t2s1"
-                    }
-                  ],
-                  "slaves": [
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_1",
-                      "name": "s1_bufa"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_2",
-                      "name": "s1_bufb"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_3",
-                      "name": "s1_ddr"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    }
-                  ],
-                  "id": "bus_1",
-                  "name": "s1_bus"
-                }
-              }
-            },
-            "slave": {
-              "id": "bb_slave_1",
-              "name": "t2s1_bufb",
-              "slaveLocate": {
-                "start": "0x10100000",
-                "end": "0x101FFFFF"
-              }
-            }
+            "master": "bb_master_1",
+            "slave": "bb_slave_1"
           },
           {
-            "master": {
-              "id": "bb_master_0",
-              "name": "t2s1_master",
-              "masterView": {
-                "address": [
-                  {
-                    "start": "0x00000000",
-                    "end": "0x000FFFFF"
-                  },
-                  {
-                    "start": "0x00100000",
-                    "end": "0x001FFFFF"
-                  },
-                  {
-                    "start": "0xC0000000",
-                    "end": "0xFFFFFFFF"
-                  }
-                ],
-                "bus": {
-                  "type": "BUS",
-                  "masters": [
-                    {
-                      "type": "CPU",
-                      "id": "cpu_1",
-                      "name": "s1_cpu"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    },
-                    {
-                      "type": "BUS_BRIDGE",
-                      "id": "bb_0",
-                      "name": "t2s1"
-                    }
-                  ],
-                  "slaves": [
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_1",
-                      "name": "s1_bufa"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_2",
-                      "name": "s1_bufb"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_3",
-                      "name": "s1_ddr"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    }
-                  ],
-                  "id": "bus_1",
-                  "name": "s1_bus"
-                }
-              }
-            },
-            "slave": {
-              "id": "bb_slave_2",
-              "name": "t2s1_ddr",
-              "slaveLocate": {
-                "start": "0x40000000",
-                "end": "0x5FFFFFFF"
-              }
-            }
+            "master": "bb_master_2",
+            "slave": "bb_slave_2"
           }
         ]
       }
@@ -1412,60 +411,7 @@
             "end": "0xFFFFFFFF"
           }
         ],
-        "bus": {
-          "type": "BUS",
-          "masters": [
-            {
-              "type": "CPU",
-              "id": "cpu_1",
-              "name": "s1_cpu"
-            },
-            {
-              "type": "DEVICE",
-              "id": "dev_0",
-              "name": "s1_eng1a"
-            },
-            {
-              "type": "DEVICE",
-              "id": "dev_1",
-              "name": "s1_eng2a"
-            },
-            {
-              "type": "BUS_BRIDGE",
-              "id": "bb_0",
-              "name": "t2s1"
-            }
-          ],
-          "slaves": [
-            {
-              "type": "MEMORY",
-              "id": "mem_1",
-              "name": "s1_bufa"
-            },
-            {
-              "type": "MEMORY",
-              "id": "mem_2",
-              "name": "s1_bufb"
-            },
-            {
-              "type": "MEMORY",
-              "id": "mem_3",
-              "name": "s1_ddr"
-            },
-            {
-              "type": "DEVICE",
-              "id": "dev_0",
-              "name": "s1_eng1a"
-            },
-            {
-              "type": "DEVICE",
-              "id": "dev_1",
-              "name": "s1_eng2a"
-            }
-          ],
-          "id": "bus_1",
-          "name": "s1_bus"
-        }
+        "bus": "bus_1"
       }
     }
   },
@@ -1476,53 +422,17 @@
       {
         "type": "BUS",
         "masters": [
-          {
-            "type": "CPU",
-            "id": "cpu_2",
-            "name": "s2_cpu"
-          },
-          {
-            "type": "DEVICE",
-            "id": "dev_2",
-            "name": "s2_eng1a"
-          },
-          {
-            "type": "DEVICE",
-            "id": "dev_3",
-            "name": "s2_eng2a"
-          },
-          {
-            "type": "BUS_BRIDGE",
-            "id": "bb_0",
-            "name": "t2s1"
-          }
+          "cpu_2",
+          "dev_2",
+          "dev_3",
+          "bb_1"
         ],
         "slaves": [
-          {
-            "type": "MEMORY",
-            "id": "mem_4",
-            "name": "s2_bufa"
-          },
-          {
-            "type": "MEMORY",
-            "id": "mem_5",
-            "name": "s2_bufb"
-          },
-          {
-            "type": "MEMORY",
-            "id": "mem_6",
-            "name": "s2_ddr"
-          },
-          {
-            "type": "DEVICE",
-            "id": "dev_2",
-            "name": "s2_eng1a"
-          },
-          {
-            "type": "DEVICE",
-            "id": "dev_3",
-            "name": "s2_eng2a"
-          }
+          "mem_4",
+          "mem_5",
+          "mem_6",
+          "dev_2",
+          "dev_3"
         ],
         "id": "bus_2",
         "name": "s2_bus"
@@ -1573,60 +483,7 @@
               "end": "0xFFFFFFFF"
             }
           ],
-          "bus": {
-            "type": "BUS",
-            "masters": [
-              {
-                "type": "CPU",
-                "id": "cpu_2",
-                "name": "s2_cpu"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_2",
-                "name": "s2_eng1a"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_3",
-                "name": "s2_eng2a"
-              },
-              {
-                "type": "BUS_BRIDGE",
-                "id": "bb_0",
-                "name": "t2s1"
-              }
-            ],
-            "slaves": [
-              {
-                "type": "MEMORY",
-                "id": "mem_4",
-                "name": "s2_bufa"
-              },
-              {
-                "type": "MEMORY",
-                "id": "mem_5",
-                "name": "s2_bufb"
-              },
-              {
-                "type": "MEMORY",
-                "id": "mem_6",
-                "name": "s2_ddr"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_2",
-                "name": "s2_eng1a"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_3",
-                "name": "s2_eng2a"
-              }
-            ],
-            "id": "bus_2",
-            "name": "s2_bus"
-          }
+          "bus": "bus_2"
         },
         "slaveLocate": {
           "start": "0x00A00000",
@@ -1644,60 +501,7 @@
               "end": "0x001FFFFF"
             }
           ],
-          "bus": {
-            "type": "BUS",
-            "masters": [
-              {
-                "type": "CPU",
-                "id": "cpu_2",
-                "name": "s2_cpu"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_2",
-                "name": "s2_eng1a"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_3",
-                "name": "s2_eng2a"
-              },
-              {
-                "type": "BUS_BRIDGE",
-                "id": "bb_0",
-                "name": "t2s1"
-              }
-            ],
-            "slaves": [
-              {
-                "type": "MEMORY",
-                "id": "mem_4",
-                "name": "s2_bufa"
-              },
-              {
-                "type": "MEMORY",
-                "id": "mem_5",
-                "name": "s2_bufb"
-              },
-              {
-                "type": "MEMORY",
-                "id": "mem_6",
-                "name": "s2_ddr"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_2",
-                "name": "s2_eng1a"
-              },
-              {
-                "type": "DEVICE",
-                "id": "dev_3",
-                "name": "s2_eng2a"
-              }
-            ],
-            "id": "bus_2",
-            "name": "s2_bus"
-          }
+          "bus": "bus_2"
         },
         "slaveLocate": {
           "start": "0x00A04000",
@@ -1712,77 +516,42 @@
         "name": "t2s2",
         "masters": [
           {
-            "id": "bb_master_1",
+            "id": "bb_master_3",
             "name": "t2s2_master",
             "masterView": {
               "address": [
                 {
                   "start": "0x00000000",
                   "end": "0x000FFFFF"
-                },
+                }
+              ],
+              "bus": "bus_1"
+            }
+          },
+          {
+            "id": "bb_master_4",
+            "name": "t2s2_master",
+            "masterView": {
+              "address": [
                 {
                   "start": "0x00100000",
                   "end": "0x001FFFFF"
-                },
+                }
+              ],
+              "bus": "bus_1"
+            }
+          },
+          {
+            "id": "bb_master_5",
+            "name": "t2s2_master",
+            "masterView": {
+              "address": [
                 {
                   "start": "0xC0000000",
                   "end": "0xFFFFFFFF"
                 }
               ],
-              "bus": {
-                "type": "BUS",
-                "masters": [
-                  {
-                    "type": "CPU",
-                    "id": "cpu_1",
-                    "name": "s1_cpu"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_0",
-                    "name": "s1_eng1a"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_1",
-                    "name": "s1_eng2a"
-                  },
-                  {
-                    "type": "BUS_BRIDGE",
-                    "id": "bb_0",
-                    "name": "t2s1"
-                  }
-                ],
-                "slaves": [
-                  {
-                    "type": "MEMORY",
-                    "id": "mem_1",
-                    "name": "s1_bufa"
-                  },
-                  {
-                    "type": "MEMORY",
-                    "id": "mem_2",
-                    "name": "s1_bufb"
-                  },
-                  {
-                    "type": "MEMORY",
-                    "id": "mem_3",
-                    "name": "s1_ddr"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_0",
-                    "name": "s1_eng1a"
-                  },
-                  {
-                    "type": "DEVICE",
-                    "id": "dev_1",
-                    "name": "s1_eng2a"
-                  }
-                ],
-                "id": "bus_1",
-                "name": "s1_bus"
-              }
+              "bus": "bus_1"
             }
           }
         ],
@@ -1814,256 +583,16 @@
         ],
         "mapper": [
           {
-            "master": {
-              "id": "bb_master_1",
-              "name": "t2s2_master",
-              "masterView": {
-                "address": [
-                  {
-                    "start": "0x00000000",
-                    "end": "0x000FFFFF"
-                  },
-                  {
-                    "start": "0x00100000",
-                    "end": "0x001FFFFF"
-                  },
-                  {
-                    "start": "0xC0000000",
-                    "end": "0xFFFFFFFF"
-                  }
-                ],
-                "bus": {
-                  "type": "BUS",
-                  "masters": [
-                    {
-                      "type": "CPU",
-                      "id": "cpu_1",
-                      "name": "s1_cpu"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    },
-                    {
-                      "type": "BUS_BRIDGE",
-                      "id": "bb_0",
-                      "name": "t2s1"
-                    }
-                  ],
-                  "slaves": [
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_1",
-                      "name": "s1_bufa"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_2",
-                      "name": "s1_bufb"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_3",
-                      "name": "s1_ddr"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    }
-                  ],
-                  "id": "bus_1",
-                  "name": "s1_bus"
-                }
-              }
-            },
-            "slave": {
-              "id": "bb_slave_3",
-              "name": "t2s2_bufa",
-              "slaveLocate": {
-                "start": "0x20000000",
-                "end": "0x200FFFFF"
-              }
-            }
+            "master": "bb_master_3",
+            "slave": "bb_slave_3"
           },
           {
-            "master": {
-              "id": "bb_master_1",
-              "name": "t2s2_master",
-              "masterView": {
-                "address": [
-                  {
-                    "start": "0x00000000",
-                    "end": "0x000FFFFF"
-                  },
-                  {
-                    "start": "0x00100000",
-                    "end": "0x001FFFFF"
-                  },
-                  {
-                    "start": "0xC0000000",
-                    "end": "0xFFFFFFFF"
-                  }
-                ],
-                "bus": {
-                  "type": "BUS",
-                  "masters": [
-                    {
-                      "type": "CPU",
-                      "id": "cpu_1",
-                      "name": "s1_cpu"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    },
-                    {
-                      "type": "BUS_BRIDGE",
-                      "id": "bb_0",
-                      "name": "t2s1"
-                    }
-                  ],
-                  "slaves": [
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_1",
-                      "name": "s1_bufa"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_2",
-                      "name": "s1_bufb"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_3",
-                      "name": "s1_ddr"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    }
-                  ],
-                  "id": "bus_1",
-                  "name": "s1_bus"
-                }
-              }
-            },
-            "slave": {
-              "id": "bb_slave_4",
-              "name": "t2s2_bufb",
-              "slaveLocate": {
-                "start": "0x20100000",
-                "end": "0x201FFFFF"
-              }
-            }
+            "master": "bb_master_4",
+            "slave": "bb_slave_4"
           },
           {
-            "master": {
-              "id": "bb_master_1",
-              "name": "t2s2_master",
-              "masterView": {
-                "address": [
-                  {
-                    "start": "0x00000000",
-                    "end": "0x000FFFFF"
-                  },
-                  {
-                    "start": "0x00100000",
-                    "end": "0x001FFFFF"
-                  },
-                  {
-                    "start": "0xC0000000",
-                    "end": "0xFFFFFFFF"
-                  }
-                ],
-                "bus": {
-                  "type": "BUS",
-                  "masters": [
-                    {
-                      "type": "CPU",
-                      "id": "cpu_1",
-                      "name": "s1_cpu"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    },
-                    {
-                      "type": "BUS_BRIDGE",
-                      "id": "bb_0",
-                      "name": "t2s1"
-                    }
-                  ],
-                  "slaves": [
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_1",
-                      "name": "s1_bufa"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_2",
-                      "name": "s1_bufb"
-                    },
-                    {
-                      "type": "MEMORY",
-                      "id": "mem_3",
-                      "name": "s1_ddr"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_0",
-                      "name": "s1_eng1a"
-                    },
-                    {
-                      "type": "DEVICE",
-                      "id": "dev_1",
-                      "name": "s1_eng2a"
-                    }
-                  ],
-                  "id": "bus_1",
-                  "name": "s1_bus"
-                }
-              }
-            },
-            "slave": {
-              "id": "bb_slave_5",
-              "name": "t2s2_ddr",
-              "slaveLocate": {
-                "start": "0x60000000",
-                "end": "0x7FFFFFFF"
-              }
-            }
+            "master": "bb_master_5",
+            "slave": "bb_slave_5"
           }
         ]
       }
@@ -2079,60 +608,7 @@
             "end": "0xFFFFFFFF"
           }
         ],
-        "bus": {
-          "type": "BUS",
-          "masters": [
-            {
-              "type": "CPU",
-              "id": "cpu_2",
-              "name": "s2_cpu"
-            },
-            {
-              "type": "DEVICE",
-              "id": "dev_2",
-              "name": "s2_eng1a"
-            },
-            {
-              "type": "DEVICE",
-              "id": "dev_3",
-              "name": "s2_eng2a"
-            },
-            {
-              "type": "BUS_BRIDGE",
-              "id": "bb_0",
-              "name": "t2s1"
-            }
-          ],
-          "slaves": [
-            {
-              "type": "MEMORY",
-              "id": "mem_4",
-              "name": "s2_bufa"
-            },
-            {
-              "type": "MEMORY",
-              "id": "mem_5",
-              "name": "s2_bufb"
-            },
-            {
-              "type": "MEMORY",
-              "id": "mem_6",
-              "name": "s2_ddr"
-            },
-            {
-              "type": "DEVICE",
-              "id": "dev_2",
-              "name": "s2_eng1a"
-            },
-            {
-              "type": "DEVICE",
-              "id": "dev_3",
-              "name": "s2_eng2a"
-            }
-          ],
-          "id": "bus_2",
-          "name": "s2_bus"
-        }
+        "bus": "bus_2"
       }
     }
   }

@@ -7,7 +7,7 @@ import { CPU } from './shared/cpu';
 import { AddressRegion } from './shared/address-region';
 import { Device } from './shared/device';
 import { Memory } from './shared/memory';
-import { SingleCoreSystem } from './shared/single-core-system';
+import { SingleCpuSystem } from './shared/single-cpu-system';
 import { BusAddressMap } from './shared/bus-address-map';
 import { BusBridgeSlave } from './shared/bus-bridge-slave';
 import { BusBridgeMaster } from './shared/bus-bridge-master';
@@ -114,33 +114,53 @@ export class AppComponent implements OnInit {
     const arSubDDR   = new AddressRegion({start: '0xC0000000', end: '0xFFFFFFFF'}); // 3G~4G
 
     const topCPU = new CPU({id: 'cpu_0', name: 'top_cpu', busAddress: new BusAddressMap({bus: topBUS, address: [arDDR]})});
-    const topDDR = new Memory({id: 'mem_0', name: 'top_ddr', busAddress: new BusAddressMap({bus: topBUS, address: [arTopDDR]})});
+    topBUS.addMaster(topCPU);
+    const topDDR = new Memory({id: 'mem_0', name: 'top_ddr', slaveLocate: arTopDDR});
+    topBUS.addSlave(topDDR);
 
     const s1CPU = new CPU({id: 'cpu_1', name: 's1_cpu', busAddress: new BusAddressMap({bus: s1BUS, address: [arDDR]})});
-    const s1BufA = new Memory({id: 'mem_1', name: 's1_bufa', busAddress: new BusAddressMap({bus: s1BUS, address: [arSubBufA]})});
-    const s1BufB = new Memory({id: 'mem_2', name: 's1_bufb', busAddress: new BusAddressMap({bus: s1BUS, address: [arSubBufB]})});
-    const s1DDR = new Memory({id: 'mem_3', name: 's1_ddr', busAddress: new BusAddressMap({bus: s1BUS, address: [arSubDDR]})});
+    s1BUS.addMaster(s1CPU);
+    const s1BufA = new Memory({id: 'mem_1', name: 's1_bufa', slaveLocate: arSubBufA});
+    s1BUS.addSlave(s1BufA)
+    const s1BufB = new Memory({id: 'mem_2', name: 's1_bufb', slaveLocate: arSubBufB});
+    s1BUS.addSlave(s1BufB)
+    const s1DDR = new Memory({id: 'mem_3', name: 's1_ddr', slaveLocate: arSubDDR});
+    s1BUS.addSlave(s1DDR)
+
     const eng1A = new Device({id: 'dev_0', name: 's1_eng1a',
       masterView: new BusAddressMap({bus: s1BUS, address: [arEngView, arSubDDR]}),
-      slaveLocate: new BusAddressMap({bus: s1BUS, address: [arEngAReg]}),
+      slaveLocate: arEngAReg
     });
+    s1BUS.addMaster(eng1A);
+    s1BUS.addSlave(eng1A);
     const eng1B = new Device({id: 'dev_1', name: 's1_eng2a',
       masterView: new BusAddressMap({bus: s1BUS, address: [arEngView]}),
-      slaveLocate: new BusAddressMap({bus: s1BUS, address: [arEngBReg]}),
+      slaveLocate: arEngBReg
     });
+    s1BUS.addMaster(eng1B);
+    s1BUS.addSlave(eng1B);
 
     const s2CPU = new CPU({id: 'cpu_2', name: 's2_cpu', busAddress: new BusAddressMap({bus: s2BUS, address: [arDDR]})});
-    const s2BufA = new Memory({id: 'mem_4', name: 's2_bufa', busAddress: new BusAddressMap({bus: s2BUS, address: [arSubBufA]})});
-    const s2BufB = new Memory({id: 'mem_5', name: 's2_bufb', busAddress: new BusAddressMap({bus: s2BUS, address: [arSubBufB]})});
-    const s2DDR = new Memory({id: 'mem_6', name: 's2_ddr', busAddress: new BusAddressMap({bus: s2BUS, address: [arSubDDR]})});
+    s2BUS.addMaster(s2CPU);
+    const s2BufA = new Memory({id: 'mem_4', name: 's2_bufa', slaveLocate: arSubBufA});
+    s2BUS.addSlave(s2BufA)
+    const s2BufB = new Memory({id: 'mem_5', name: 's2_bufb', slaveLocate: arSubBufB});
+    s2BUS.addSlave(s2BufB)
+    const s2DDR = new Memory({id: 'mem_6', name: 's2_ddr', slaveLocate: arSubDDR});
+    s2BUS.addSlave(s2DDR)
+
     const eng2A = new Device({id: 'dev_2', name: 's2_eng1a',
       masterView: new BusAddressMap({bus: s2BUS, address: [arEngView, arSubDDR]}),
-      slaveLocate: new BusAddressMap({bus: s2BUS, address: [arEngAReg]}),
+      slaveLocate: arEngAReg,
     });
+    s2BUS.addMaster(eng2A);
+    s2BUS.addSlave(eng2A);
     const eng2B = new Device({id: 'dev_3', name: 's2_eng2a',
       masterView: new BusAddressMap({bus: s2BUS, address: [arEngView]}),
-      slaveLocate: new BusAddressMap({bus: s2BUS, address: [arEngBReg]}),
+      slaveLocate: arEngBReg
     });
+    s2BUS.addMaster(eng2B);
+    s2BUS.addSlave(eng2B);
 
     const arT2S1BufA = new AddressRegion({start: '0x10000000', end: '0x100FFFFF'}); // 256M~257M
     const arT2S1BufB = new AddressRegion({start: '0x10100000', end: '0x101FFFFF'}); // 257M~258M
@@ -158,25 +178,38 @@ export class AppComponent implements OnInit {
     const t2s2BBSlaveBufB = new BusBridgeSlave({id: 'bb_slave_4', name: 't2s2_bufb', slaveLocate: arT2S2BufB});
     const t2s2BBSlaveDDR =  new BusBridgeSlave({id: 'bb_slave_5', name: 't2s2_ddr',  slaveLocate: arT2S2DDR});
 
-    const t2s1BBMaster = new BusBridgeMaster({id: 'bb_master_0', name: 't2s1_master',
-      busAddress: new BusAddressMap({bus: s1BUS, address: [arSubBufA, arSubBufB, arSubDDR]})
+    const t2s1BBMaster1 = new BusBridgeMaster({id: 'bb_master_0', name: 't2s1_master',
+      busAddress: new BusAddressMap({bus: s1BUS, address: [arSubBufA]})
+    });
+    const t2s1BBMaster2 = new BusBridgeMaster({id: 'bb_master_1', name: 't2s1_master',
+      busAddress: new BusAddressMap({bus: s1BUS, address: [arSubBufB]})
+    });
+    const t2s1BBMaster3 = new BusBridgeMaster({id: 'bb_master_2', name: 't2s1_master',
+      busAddress: new BusAddressMap({bus: s1BUS, address: [arSubDDR]})
     });
 
-    const t2s2BBMaster = new BusBridgeMaster({id: 'bb_master_1', name: 't2s2_master',
-      busAddress: new BusAddressMap({bus: s1BUS, address: [arSubBufA, arSubBufB, arSubDDR]})
+    const t2s2BBMaster1 = new BusBridgeMaster({id: 'bb_master_3', name: 't2s2_master',
+      busAddress: new BusAddressMap({bus: s1BUS, address: [arSubBufA]})
+    });
+    const t2s2BBMaster2 = new BusBridgeMaster({id: 'bb_master_4', name: 't2s2_master',
+      busAddress: new BusAddressMap({bus: s1BUS, address: [arSubBufB]})
+    });
+    const t2s2BBMaster3 = new BusBridgeMaster({id: 'bb_master_5', name: 't2s2_master',
+      busAddress: new BusAddressMap({bus: s1BUS, address: [arSubDDR]})
     });
 
-    const t2s1BBMapper1 = new BusBridgeMapper(t2s1BBMaster, t2s1BBSlaveBufA);
-    const t2s1BBMapper2 = new BusBridgeMapper(t2s1BBMaster, t2s1BBSlaveBufB);
-    const t2s1BBMapper3 = new BusBridgeMapper(t2s1BBMaster, t2s1BBSlaveDDR);
+    const t2s1BBMapper1 = new BusBridgeMapper(t2s1BBMaster1, t2s1BBSlaveBufA);
+    const t2s1BBMapper2 = new BusBridgeMapper(t2s1BBMaster2, t2s1BBSlaveBufB);
+    const t2s1BBMapper3 = new BusBridgeMapper(t2s1BBMaster3, t2s1BBSlaveDDR);
 
-    const t2s2BBMapper1 = new BusBridgeMapper(t2s2BBMaster, t2s2BBSlaveBufA);
-    const t2s2BBMapper2 = new BusBridgeMapper(t2s2BBMaster, t2s2BBSlaveBufB);
-    const t2s2BBMapper3 = new BusBridgeMapper(t2s2BBMaster, t2s2BBSlaveDDR);
+    const t2s2BBMapper1 = new BusBridgeMapper(t2s2BBMaster1, t2s2BBSlaveBufA);
+    const t2s2BBMapper2 = new BusBridgeMapper(t2s2BBMaster2, t2s2BBSlaveBufB);
+    const t2s2BBMapper3 = new BusBridgeMapper(t2s2BBMaster3, t2s2BBSlaveDDR);
 
     const t2s1 = new BusBridge({
       id: 'bb_0', name: 't2s1',
-      masters: [t2s1BBMaster], slaves: [t2s1BBSlaveBufA, t2s1BBSlaveBufB, t2s1BBSlaveDDR],
+      masters: [t2s1BBMaster1, t2s1BBMaster2, t2s1BBMaster3],
+      slaves: [t2s1BBSlaveBufA, t2s1BBSlaveBufB, t2s1BBSlaveDDR],
       mapper: [t2s1BBMapper1, t2s1BBMapper2, t2s1BBMapper3]
     });
 
@@ -185,22 +218,23 @@ export class AppComponent implements OnInit {
 
     const t2s2 = new BusBridge({
       id: 'bb_1', name: 't2s2',
-      masters: [t2s2BBMaster], slaves: [t2s2BBSlaveBufA, t2s2BBSlaveBufB, t2s2BBSlaveDDR],
+      masters: [t2s2BBMaster1, t2s2BBMaster2, t2s2BBMaster3],
+      slaves: [t2s2BBSlaveBufA, t2s2BBSlaveBufB, t2s2BBSlaveDDR],
       mapper: [t2s2BBMapper1, t2s2BBMapper2, t2s2BBMapper3]
     });
+    topBUS.addSlave(t2s2);
+    s2BUS.addMaster(t2s2);
 
-    topBUS.addSlave(t2s1);
-    s2BUS.addMaster(t2s1);
-
-    const topSystem = new SingleCoreSystem({id: 'system_0', name: 'top_system'});
+    const topSystem = new SingleCpuSystem({id: 'system_0', name: 'top_system'});
     topSystem.addHardwares([topBUS, topCPU, topDDR, t2s1, t2s2]);
 
-    const subSystem1 = new SingleCoreSystem({id: 'system_1', name: 'sub_system_1'});
+    const subSystem1 = new SingleCpuSystem({id: 'system_1', name: 'sub_system_1'});
     subSystem1.addHardwares([s1BUS, s1CPU, eng1A, eng1B, s1BufA, s1BufB, s1DDR, t2s1]);
 
-    const subSystem2 = new SingleCoreSystem({id: 'system_2', name: 'sub_system_2'});
+    const subSystem2 = new SingleCpuSystem({id: 'system_2', name: 'sub_system_2'});
     subSystem2.addHardwares([s2BUS, s2CPU, eng2A, eng2B, s2BufA, s2BufB, s2DDR, t2s2]);
 
+    // this.greetings.push(JSON.stringify(topSystem));
     this.greetings.push(JSON.stringify([topSystem, subSystem1, subSystem2]));
   }
 }

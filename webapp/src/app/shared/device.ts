@@ -13,17 +13,15 @@ export class Device implements Hardware {
     id: string;
     name: string;
     masterView?: BusAddressMap;
-    slaveLocate?: BusAddressMap;
+    slaveLocate?: AddressRegion;
   }) {
     this.id = options.id;
     this.name = options.name;
     if (options.masterView != null) {
       this.masterView = options.masterView;
-      options.masterView.bus.addMaster(this);
     }
     if (options.slaveLocate != null) {
-      this.slaveLocate = options.slaveLocate.address[0];
-      options.slaveLocate.bus.addSlave(this);
+      this.slaveLocate = options.slaveLocate;
     }
   }
 }

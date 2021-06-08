@@ -10,11 +10,10 @@ export class Memory implements Hardware {
   constructor(options: {
     id: string;
     name: string;
-    busAddress: BusAddressMap;
+    slaveLocate: AddressRegion;
   }) {
     this.id = options.id;
     this.name = options.name;
-    this.slaveLocate = options.busAddress.address[0];
-    options.busAddress.bus.addSlave(this);
+    this.slaveLocate = options.slaveLocate;
   }
 }

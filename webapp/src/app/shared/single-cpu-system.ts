@@ -5,7 +5,7 @@ import { Device } from "./device";
 import { Hardware } from "./hardware";
 import { Memory } from "./memory";
 
-export class SingleCoreSystem {
+export class SingleCpuSystem {
   id = '';
   name = '';
   bus: BUS[] = [];
