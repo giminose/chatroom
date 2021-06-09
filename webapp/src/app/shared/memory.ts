@@ -1,16 +1,15 @@
-import { AddressRegion } from "./address-region";
-import { BusAddressMap } from "./bus-address-map";
+import { Address } from "./address";
 import { Hardware } from "./hardware";
 
 export class Memory implements Hardware {
   type: string = 'MEMORY';
   id: string;
   name: string;
-  slaveLocate: AddressRegion;
+  slaveLocate: Address;
   constructor(options: {
     id: string;
     name: string;
-    slaveLocate: AddressRegion;
+    slaveLocate: Address;
   }) {
     this.id = options.id;
     this.name = options.name;

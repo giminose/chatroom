@@ -1,13 +1,12 @@
-import { AddressRegion } from "./address-region";
-
+import { Address } from "./address";
 export class BusBridgeSlave {
   id: string;
   name: string;
-  slaveLocate: AddressRegion;
+  slaveLocate: Address;
   constructor(options: {
     id: string;
     name: string;
-    slaveLocate: AddressRegion;
+    slaveLocate: Address;
   }) {
     this.id = options.id;
     this.name = options.name;

@@ -12,7 +12,6 @@ export class SingleCpuSystem {
   cpu!: CPU;
   memories: Memory[] = [];
   devices: Device[] = [];
-  busBridges: BusBridge[] = [];
 
   constructor(options: {
     id: string;
@@ -35,9 +34,6 @@ export class SingleCpuSystem {
       }
       if (hw.type === 'CPU') {
         this.cpu = <CPU>hw;
-      }
-      if (hw.type === 'BUS_BRIDGE') {
-        this.busBridges.push(<BusBridge>hw);
       }
     })
   }

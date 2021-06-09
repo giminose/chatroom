@@ -1,4 +1,6 @@
-export class AddressRegion {
+import { Address } from "./address";
+
+export class AddressRegion implements Address{
   start: string;
   end: string;
 

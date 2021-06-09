@@ -1,615 +1,445 @@
-[
-  {
-    "id": "system_0",
-    "name": "top_system",
-    "bus": [
-      {
-        "type": "BUS",
-        "masters": [
-          "cpu_0"
-        ],
-        "slaves": [
-          "mem_0",
-          "bb_0",
-          "bb_1"
-        ],
-        "id": "bus_0",
-        "name": "top_bus"
-      }
-    ],
-    "memories": [
-      {
-        "type": "MEMORY",
-        "id": "mem_0",
-        "name": "top_ddr",
-        "slaveLocate": {
-          "start": "0x80000000",
-          "end": "0xFFFFFFFF"
+{
+  "busbridge": [
+    {
+      "type": "BUS_BRIDGE",
+      "id": "bb_0",
+      "name": "t2s1",
+      "masters": [
+        {
+          "id": "bb_master_0",
+          "name": "t2s1_master1",
+          "masterView": {
+            "address": [
+              {
+                "start": "0x00000000",
+                "end": "0x000FFFFF"
+              }
+            ],
+            "bus": "bus_1"
+          }
+        },
+        {
+          "id": "bb_master_1",
+          "name": "t2s1_master2",
+          "masterView": {
+            "address": [
+              {
+                "start": "0x00100000",
+                "end": "0x001FFFFF"
+              }
+            ],
+            "bus": "bus_1"
+          }
+        },
+        {
+          "id": "bb_master_2",
+          "name": "t2s1_master3",
+          "masterView": {
+            "address": [
+              {
+                "start": "0xC0000000",
+                "offset": "0x20000000",
+                "size": "0x20000000"
+              }
+            ],
+            "bus": "bus_1"
+          }
         }
-      }
-    ],
-    "devices": [],
-    "busBridges": [
-      {
-        "type": "BUS_BRIDGE",
-        "id": "bb_0",
-        "name": "t2s1",
-        "masters": [
-          {
-            "id": "bb_master_0",
-            "name": "t2s1_master",
-            "masterView": {
-              "address": [
-                {
-                  "start": "0x00000000",
-                  "end": "0x000FFFFF"
-                }
-              ],
-              "bus": "bus_1"
-            }
-          },
-          {
-            "id": "bb_master_1",
-            "name": "t2s1_master",
-            "masterView": {
-              "address": [
-                {
-                  "start": "0x00100000",
-                  "end": "0x001FFFFF"
-                }
-              ],
-              "bus": "bus_1"
-            }
-          },
-          {
-            "id": "bb_master_2",
-            "name": "t2s1_master",
-            "masterView": {
-              "address": [
-                {
-                  "start": "0xC0000000",
-                  "end": "0xFFFFFFFF"
-                }
-              ],
-              "bus": "bus_1"
-            }
+      ],
+      "slaves": [
+        {
+          "id": "bb_slave_0",
+          "name": "t2s1_bufa",
+          "slaveLocate": {
+            "start": "0x10000000",
+            "end": "0x100FFFFF"
           }
-        ],
-        "slaves": [
-          {
-            "id": "bb_slave_0",
-            "name": "t2s1_bufa",
-            "slaveLocate": {
-              "start": "0x10000000",
-              "end": "0x100FFFFF"
-            }
-          },
-          {
-            "id": "bb_slave_1",
-            "name": "t2s1_bufb",
-            "slaveLocate": {
-              "start": "0x10100000",
-              "end": "0x101FFFFF"
-            }
-          },
-          {
-            "id": "bb_slave_2",
-            "name": "t2s1_ddr",
-            "slaveLocate": {
-              "start": "0x40000000",
-              "end": "0x5FFFFFFF"
-            }
+        },
+        {
+          "id": "bb_slave_1",
+          "name": "t2s1_bufb",
+          "slaveLocate": {
+            "start": "0x10100000",
+            "end": "0x101FFFFF"
           }
-        ],
-        "mapper": [
-          {
-            "master": "bb_master_0",
-            "slave": "bb_slave_0"
-          },
-          {
-            "master": "bb_master_1",
-            "slave": "bb_slave_1"
-          },
-          {
-            "master": "bb_master_2",
-            "slave": "bb_slave_2"
+        },
+        {
+          "id": "bb_slave_2",
+          "name": "t2s1_ddr",
+          "slaveLocate": {
+            "start": "0x40000000",
+            "offset": "0x20000000",
+            "size": "0x20000000"
           }
-        ]
-      },
-      {
-        "type": "BUS_BRIDGE",
-        "id": "bb_1",
-        "name": "t2s2",
-        "masters": [
-          {
-            "id": "bb_master_3",
-            "name": "t2s2_master",
-            "masterView": {
-              "address": [
-                {
-                  "start": "0x00000000",
-                  "end": "0x000FFFFF"
-                }
-              ],
-              "bus": "bus_1"
-            }
-          },
-          {
-            "id": "bb_master_4",
-            "name": "t2s2_master",
-            "masterView": {
-              "address": [
-                {
-                  "start": "0x00100000",
-                  "end": "0x001FFFFF"
-                }
-              ],
-              "bus": "bus_1"
-            }
-          },
-          {
-            "id": "bb_master_5",
-            "name": "t2s2_master",
-            "masterView": {
-              "address": [
-                {
-                  "start": "0xC0000000",
-                  "end": "0xFFFFFFFF"
-                }
-              ],
-              "bus": "bus_1"
-            }
+        }
+      ],
+      "mapper": [
+        {
+          "master": "bb_master_0",
+          "slave": "bb_slave_0"
+        },
+        {
+          "master": "bb_master_1",
+          "slave": "bb_slave_1"
+        },
+        {
+          "master": "bb_master_2",
+          "slave": "bb_slave_2"
+        }
+      ]
+    },
+    {
+      "type": "BUS_BRIDGE",
+      "id": "bb_1",
+      "name": "t2s2",
+      "masters": [
+        {
+          "id": "bb_master_3",
+          "name": "t2s2_master4",
+          "masterView": {
+            "address": [
+              {
+                "start": "0x00000000",
+                "end": "0x000FFFFF"
+              }
+            ],
+            "bus": "bus_2"
           }
-        ],
-        "slaves": [
-          {
-            "id": "bb_slave_3",
-            "name": "t2s2_bufa",
-            "slaveLocate": {
-              "start": "0x20000000",
-              "end": "0x200FFFFF"
-            }
-          },
-          {
-            "id": "bb_slave_4",
-            "name": "t2s2_bufb",
-            "slaveLocate": {
-              "start": "0x20100000",
-              "end": "0x201FFFFF"
-            }
-          },
-          {
-            "id": "bb_slave_5",
-            "name": "t2s2_ddr",
-            "slaveLocate": {
-              "start": "0x60000000",
-              "end": "0x7FFFFFFF"
-            }
+        },
+        {
+          "id": "bb_master_4",
+          "name": "t2s2_master5",
+          "masterView": {
+            "address": [
+              {
+                "start": "0x00100000",
+                "end": "0x001FFFFF"
+              }
+            ],
+            "bus": "bus_2"
           }
-        ],
-        "mapper": [
-          {
-            "master": "bb_master_3",
-            "slave": "bb_slave_3"
-          },
-          {
-            "master": "bb_master_4",
-            "slave": "bb_slave_4"
-          },
-          {
-            "master": "bb_master_5",
-            "slave": "bb_slave_5"
+        },
+        {
+          "id": "bb_master_5",
+          "name": "t2s2_master6",
+          "masterView": {
+            "address": [
+              {
+                "start": "0xC0000000",
+                "offset": "0x20000000",
+                "size": "0x20000000"
+              }
+            ],
+            "bus": "bus_2"
           }
-        ]
-      }
-    ],
-    "cpu": {
-      "type": "CPU",
-      "id": "cpu_0",
-      "name": "top_cpu",
-      "masterView": {
-        "address": [
-          {
-            "start": "0x00000000",
+        }
+      ],
+      "slaves": [
+        {
+          "id": "bb_slave_3",
+          "name": "t2s2_bufa",
+          "slaveLocate": {
+            "start": "0x20000000",
+            "end": "0x200FFFFF"
+          }
+        },
+        {
+          "id": "bb_slave_4",
+          "name": "t2s2_bufb",
+          "slaveLocate": {
+            "start": "0x20100000",
+            "end": "0x201FFFFF"
+          }
+        },
+        {
+          "id": "bb_slave_5",
+          "name": "t2s2_ddr",
+          "slaveLocate": {
+            "start": "0x60000000",
+            "offset": "0x20000000",
+            "size": "0x20000000"
+          }
+        }
+      ],
+      "mapper": [
+        {
+          "master": "bb_master_3",
+          "slave": "bb_slave_3"
+        },
+        {
+          "master": "bb_master_4",
+          "slave": "bb_slave_4"
+        },
+        {
+          "master": "bb_master_5",
+          "slave": "bb_slave_5"
+        }
+      ]
+    }
+  ],
+  "systems": [
+    {
+      "id": "system_0",
+      "name": "top_system",
+      "bus": [
+        {
+          "type": "BUS",
+          "masters": [
+            "cpu_0"
+          ],
+          "slaves": [
+            "mem_0",
+            "bb_0",
+            "bb_1"
+          ],
+          "id": "bus_0",
+          "name": "top_bus"
+        }
+      ],
+      "memories": [
+        {
+          "type": "MEMORY",
+          "id": "mem_0",
+          "name": "top_ddr",
+          "slaveLocate": {
+            "start": "0x80000000",
             "end": "0xFFFFFFFF"
           }
-        ],
-        "bus": "bus_0"
-      }
-    }
-  },
-  {
-    "id": "system_1",
-    "name": "sub_system_1",
-    "bus": [
-      {
-        "type": "BUS",
-        "masters": [
-          "cpu_1",
-          "dev_0",
-          "dev_1",
-          "bb_0"
-        ],
-        "slaves": [
-          "mem_1",
-          "mem_2",
-          "mem_3",
-          "dev_0",
-          "dev_1"
-        ],
-        "id": "bus_1",
-        "name": "s1_bus"
-      }
-    ],
-    "memories": [
-      {
-        "type": "MEMORY",
-        "id": "mem_1",
-        "name": "s1_bufa",
-        "slaveLocate": {
-          "start": "0x00000000",
-          "end": "0x000FFFFF"
         }
-      },
-      {
-        "type": "MEMORY",
-        "id": "mem_2",
-        "name": "s1_bufb",
-        "slaveLocate": {
-          "start": "0x00100000",
-          "end": "0x001FFFFF"
-        }
-      },
-      {
-        "type": "MEMORY",
-        "id": "mem_3",
-        "name": "s1_ddr",
-        "slaveLocate": {
-          "start": "0xC0000000",
-          "end": "0xFFFFFFFF"
-        }
-      }
-    ],
-    "devices": [
-      {
-        "type": "DEVICE",
-        "id": "dev_0",
-        "name": "s1_eng1a",
+      ],
+      "devices": [],
+      "cpu": {
+        "type": "CPU",
+        "id": "cpu_0",
+        "name": "top_cpu",
         "masterView": {
           "address": [
             {
-              "start": "0x000FFFFF",
-              "end": "0x001FFFFF"
-            },
+              "start": "0x00000000",
+              "end": "0xFFFFFFFF"
+            }
+          ],
+          "bus": "bus_0"
+        }
+      }
+    },
+    {
+      "id": "system_1",
+      "name": "sub_system_1",
+      "bus": [
+        {
+          "type": "BUS",
+          "masters": [
+            "cpu_1",
+            "dev_0",
+            "dev_1",
+            "bb_0"
+          ],
+          "slaves": [
+            "mem_1",
+            "mem_2",
+            "mem_3",
+            "dev_0",
+            "dev_1"
+          ],
+          "id": "bus_1",
+          "name": "s1_bus"
+        }
+      ],
+      "memories": [
+        {
+          "type": "MEMORY",
+          "id": "mem_1",
+          "name": "s1_bufa",
+          "slaveLocate": {
+            "start": "0x00000000",
+            "end": "0x000FFFFF"
+          }
+        },
+        {
+          "type": "MEMORY",
+          "id": "mem_2",
+          "name": "s1_bufb",
+          "slaveLocate": {
+            "start": "0x00100000",
+            "end": "0x001FFFFF"
+          }
+        },
+        {
+          "type": "MEMORY",
+          "id": "mem_3",
+          "name": "s1_ddr",
+          "slaveLocate": {
+            "start": "0xC0000000",
+            "end": "0xFFFFFFFF"
+          }
+        }
+      ],
+      "devices": [
+        {
+          "type": "DEVICE",
+          "id": "dev_0",
+          "name": "s1_eng1a",
+          "masterView": {
+            "address": [
+              {
+                "start": "0x000FFFFF",
+                "end": "0x001FFFFF"
+              },
+              {
+                "start": "0xC0000000",
+                "end": "0xFFFFFFFF"
+              }
+            ],
+            "bus": "bus_1"
+          },
+          "slaveLocate": {
+            "start": "0x00A00000",
+            "end": "0x00A03FFF"
+          }
+        },
+        {
+          "type": "DEVICE",
+          "id": "dev_1",
+          "name": "s1_eng2a",
+          "masterView": {
+            "address": [
+              {
+                "start": "0x000FFFFF",
+                "end": "0x001FFFFF"
+              }
+            ],
+            "bus": "bus_1"
+          },
+          "slaveLocate": {
+            "start": "0x00A04000",
+            "end": "0x00A07FFF"
+          }
+        }
+      ],
+      "cpu": {
+        "type": "CPU",
+        "id": "cpu_1",
+        "name": "s1_cpu",
+        "masterView": {
+          "address": [
             {
-              "start": "0xC0000000",
+              "start": "0x00000000",
               "end": "0xFFFFFFFF"
             }
           ],
           "bus": "bus_1"
-        },
-        "slaveLocate": {
-          "start": "0x00A00000",
-          "end": "0x00A03FFF"
         }
-      },
-      {
-        "type": "DEVICE",
-        "id": "dev_1",
-        "name": "s1_eng2a",
-        "masterView": {
-          "address": [
-            {
-              "start": "0x000FFFFF",
-              "end": "0x001FFFFF"
-            }
+      }
+    },
+    {
+      "id": "system_2",
+      "name": "sub_system_2",
+      "bus": [
+        {
+          "type": "BUS",
+          "masters": [
+            "cpu_2",
+            "dev_2",
+            "dev_3",
+            "bb_1"
           ],
-          "bus": "bus_1"
-        },
-        "slaveLocate": {
-          "start": "0x00A04000",
-          "end": "0x00A07FFF"
+          "slaves": [
+            "mem_4",
+            "mem_5",
+            "mem_6",
+            "dev_2",
+            "dev_3"
+          ],
+          "id": "bus_2",
+          "name": "s2_bus"
         }
-      }
-    ],
-    "busBridges": [
-      {
-        "type": "BUS_BRIDGE",
-        "id": "bb_0",
-        "name": "t2s1",
-        "masters": [
-          {
-            "id": "bb_master_0",
-            "name": "t2s1_master",
-            "masterView": {
-              "address": [
-                {
-                  "start": "0x00000000",
-                  "end": "0x000FFFFF"
-                }
-              ],
-              "bus": "bus_1"
-            }
-          },
-          {
-            "id": "bb_master_1",
-            "name": "t2s1_master",
-            "masterView": {
-              "address": [
-                {
-                  "start": "0x00100000",
-                  "end": "0x001FFFFF"
-                }
-              ],
-              "bus": "bus_1"
-            }
-          },
-          {
-            "id": "bb_master_2",
-            "name": "t2s1_master",
-            "masterView": {
-              "address": [
-                {
-                  "start": "0xC0000000",
-                  "end": "0xFFFFFFFF"
-                }
-              ],
-              "bus": "bus_1"
-            }
-          }
-        ],
-        "slaves": [
-          {
-            "id": "bb_slave_0",
-            "name": "t2s1_bufa",
-            "slaveLocate": {
-              "start": "0x10000000",
-              "end": "0x100FFFFF"
-            }
-          },
-          {
-            "id": "bb_slave_1",
-            "name": "t2s1_bufb",
-            "slaveLocate": {
-              "start": "0x10100000",
-              "end": "0x101FFFFF"
-            }
-          },
-          {
-            "id": "bb_slave_2",
-            "name": "t2s1_ddr",
-            "slaveLocate": {
-              "start": "0x40000000",
-              "end": "0x5FFFFFFF"
-            }
-          }
-        ],
-        "mapper": [
-          {
-            "master": "bb_master_0",
-            "slave": "bb_slave_0"
-          },
-          {
-            "master": "bb_master_1",
-            "slave": "bb_slave_1"
-          },
-          {
-            "master": "bb_master_2",
-            "slave": "bb_slave_2"
-          }
-        ]
-      }
-    ],
-    "cpu": {
-      "type": "CPU",
-      "id": "cpu_1",
-      "name": "s1_cpu",
-      "masterView": {
-        "address": [
-          {
+      ],
+      "memories": [
+        {
+          "type": "MEMORY",
+          "id": "mem_4",
+          "name": "s2_bufa",
+          "slaveLocate": {
             "start": "0x00000000",
+            "end": "0x000FFFFF"
+          }
+        },
+        {
+          "type": "MEMORY",
+          "id": "mem_5",
+          "name": "s2_bufb",
+          "slaveLocate": {
+            "start": "0x00100000",
+            "end": "0x001FFFFF"
+          }
+        },
+        {
+          "type": "MEMORY",
+          "id": "mem_6",
+          "name": "s2_ddr",
+          "slaveLocate": {
+            "start": "0xC0000000",
             "end": "0xFFFFFFFF"
           }
-        ],
-        "bus": "bus_1"
-      }
-    }
-  },
-  {
-    "id": "system_2",
-    "name": "sub_system_2",
-    "bus": [
-      {
-        "type": "BUS",
-        "masters": [
-          "cpu_2",
-          "dev_2",
-          "dev_3",
-          "bb_1"
-        ],
-        "slaves": [
-          "mem_4",
-          "mem_5",
-          "mem_6",
-          "dev_2",
-          "dev_3"
-        ],
-        "id": "bus_2",
-        "name": "s2_bus"
-      }
-    ],
-    "memories": [
-      {
-        "type": "MEMORY",
-        "id": "mem_4",
-        "name": "s2_bufa",
-        "slaveLocate": {
-          "start": "0x00000000",
-          "end": "0x000FFFFF"
         }
-      },
-      {
-        "type": "MEMORY",
-        "id": "mem_5",
-        "name": "s2_bufb",
-        "slaveLocate": {
-          "start": "0x00100000",
-          "end": "0x001FFFFF"
+      ],
+      "devices": [
+        {
+          "type": "DEVICE",
+          "id": "dev_2",
+          "name": "s2_eng1a",
+          "masterView": {
+            "address": [
+              {
+                "start": "0x000FFFFF",
+                "end": "0x001FFFFF"
+              },
+              {
+                "start": "0xC0000000",
+                "end": "0xFFFFFFFF"
+              }
+            ],
+            "bus": "bus_2"
+          },
+          "slaveLocate": {
+            "start": "0x00A00000",
+            "end": "0x00A03FFF"
+          }
+        },
+        {
+          "type": "DEVICE",
+          "id": "dev_3",
+          "name": "s2_eng2a",
+          "masterView": {
+            "address": [
+              {
+                "start": "0x000FFFFF",
+                "end": "0x001FFFFF"
+              }
+            ],
+            "bus": "bus_2"
+          },
+          "slaveLocate": {
+            "start": "0x00A04000",
+            "end": "0x00A07FFF"
+          }
         }
-      },
-      {
-        "type": "MEMORY",
-        "id": "mem_6",
-        "name": "s2_ddr",
-        "slaveLocate": {
-          "start": "0xC0000000",
-          "end": "0xFFFFFFFF"
-        }
-      }
-    ],
-    "devices": [
-      {
-        "type": "DEVICE",
-        "id": "dev_2",
-        "name": "s2_eng1a",
+      ],
+      "cpu": {
+        "type": "CPU",
+        "id": "cpu_2",
+        "name": "s2_cpu",
         "masterView": {
           "address": [
             {
-              "start": "0x000FFFFF",
-              "end": "0x001FFFFF"
-            },
-            {
-              "start": "0xC0000000",
+              "start": "0x00000000",
               "end": "0xFFFFFFFF"
             }
           ],
           "bus": "bus_2"
-        },
-        "slaveLocate": {
-          "start": "0x00A00000",
-          "end": "0x00A03FFF"
         }
-      },
-      {
-        "type": "DEVICE",
-        "id": "dev_3",
-        "name": "s2_eng2a",
-        "masterView": {
-          "address": [
-            {
-              "start": "0x000FFFFF",
-              "end": "0x001FFFFF"
-            }
-          ],
-          "bus": "bus_2"
-        },
-        "slaveLocate": {
-          "start": "0x00A04000",
-          "end": "0x00A07FFF"
-        }
-      }
-    ],
-    "busBridges": [
-      {
-        "type": "BUS_BRIDGE",
-        "id": "bb_1",
-        "name": "t2s2",
-        "masters": [
-          {
-            "id": "bb_master_3",
-            "name": "t2s2_master",
-            "masterView": {
-              "address": [
-                {
-                  "start": "0x00000000",
-                  "end": "0x000FFFFF"
-                }
-              ],
-              "bus": "bus_1"
-            }
-          },
-          {
-            "id": "bb_master_4",
-            "name": "t2s2_master",
-            "masterView": {
-              "address": [
-                {
-                  "start": "0x00100000",
-                  "end": "0x001FFFFF"
-                }
-              ],
-              "bus": "bus_1"
-            }
-          },
-          {
-            "id": "bb_master_5",
-            "name": "t2s2_master",
-            "masterView": {
-              "address": [
-                {
-                  "start": "0xC0000000",
-                  "end": "0xFFFFFFFF"
-                }
-              ],
-              "bus": "bus_1"
-            }
-          }
-        ],
-        "slaves": [
-          {
-            "id": "bb_slave_3",
-            "name": "t2s2_bufa",
-            "slaveLocate": {
-              "start": "0x20000000",
-              "end": "0x200FFFFF"
-            }
-          },
-          {
-            "id": "bb_slave_4",
-            "name": "t2s2_bufb",
-            "slaveLocate": {
-              "start": "0x20100000",
-              "end": "0x201FFFFF"
-            }
-          },
-          {
-            "id": "bb_slave_5",
-            "name": "t2s2_ddr",
-            "slaveLocate": {
-              "start": "0x60000000",
-              "end": "0x7FFFFFFF"
-            }
-          }
-        ],
-        "mapper": [
-          {
-            "master": "bb_master_3",
-            "slave": "bb_slave_3"
-          },
-          {
-            "master": "bb_master_4",
-            "slave": "bb_slave_4"
-          },
-          {
-            "master": "bb_master_5",
-            "slave": "bb_slave_5"
-          }
-        ]
-      }
-    ],
-    "cpu": {
-      "type": "CPU",
-      "id": "cpu_2",
-      "name": "s2_cpu",
-      "masterView": {
-        "address": [
-          {
-            "start": "0x00000000",
-            "end": "0xFFFFFFFF"
-          }
-        ],
-        "bus": "bus_2"
       }
     }
-  }
-]
+  ]
+}

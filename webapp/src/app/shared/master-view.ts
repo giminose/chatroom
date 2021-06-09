@@ -1,13 +1,13 @@
-import { AddressRegion } from "./address-region";
+import { Address } from "./address";
 import { BUS } from "./bus";
 
-export class BusAddressMap {
+export class MasterView {
   bus: string;
-  address: AddressRegion[] = [];
+  address: Address[] = [];
 
   constructor(options: {
     bus: BUS,
-    address: AddressRegion[]
+    address: Address[]
   }) {
     this.bus = options.bus.id;
     this.address = options.address;

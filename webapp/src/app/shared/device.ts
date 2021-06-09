@@ -1,19 +1,19 @@
-import { AddressRegion } from "./address-region";
-import { BusAddressMap } from "./bus-address-map";
+import { MasterView } from "./master-view";
 import { Hardware } from "./hardware";
+import { Address } from "./address";
 
 export class Device implements Hardware {
   type = 'DEVICE'
   id: string;
   name: string;
-  masterView?: BusAddressMap;
-  slaveLocate?: AddressRegion;
+  masterView?: MasterView;
+  slaveLocate?: Address;
 
   constructor(options: {
     id: string;
     name: string;
-    masterView?: BusAddressMap;
-    slaveLocate?: AddressRegion;
+    masterView?: MasterView;
+    slaveLocate?: Address;
   }) {
     this.id = options.id;
     this.name = options.name;
