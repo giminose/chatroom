@@ -163,7 +163,7 @@ export class AppComponent implements OnInit {
     s2BUS.addSlave(eng2B);
 
     const arT2S1BufA = new Address({type: 'REGION', start: '0x10000000', offset: '0x0', limit: '0x100FFFFF'}); // 256M~257M
-    const arT2S1BufB = new Address({type: 'OFFSET', start: '0x10100000', offset: '0x0', limit: '0x101FFFFF'}); // 257M~258M
+    const arT2S1BufB = new Address({type: 'REGION', start: '0x10100000', offset: '0x0', limit: '0x101FFFFF'}); // 257M~258M
     const arT2S1DDR  = new Address({type: 'OFFSET', start: '0x40000000', offset: '0x20000000', limit: '0x20000000'}); // 1G~1.5G
 
     const arT2S2BufA = new Address({type: 'REGION', start: '0x20000000', offset: '0x0', limit: '0x200FFFFF'}); // 512M~513M
