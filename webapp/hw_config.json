@@ -11,8 +11,10 @@
           "masterView": {
             "address": [
               {
+                "type": "REGION",
                 "start": "0x00000000",
-                "end": "0x000FFFFF"
+                "offset": "0x0",
+                "limit": "0x000FFFFF"
               }
             ],
             "bus": "bus_1"
@@ -24,8 +26,10 @@
           "masterView": {
             "address": [
               {
+                "type": "REGION",
                 "start": "0x00100000",
-                "end": "0x001FFFFF"
+                "offset": "0x0",
+                "limit": "0x001FFFFF"
               }
             ],
             "bus": "bus_1"
@@ -37,9 +41,10 @@
           "masterView": {
             "address": [
               {
+                "type": "OFFSET",
                 "start": "0xC0000000",
                 "offset": "0x20000000",
-                "size": "0x20000000"
+                "limit": "0x20000000"
               }
             ],
             "bus": "bus_1"
@@ -51,25 +56,30 @@
           "id": "bb_slave_0",
           "name": "t2s1_bufa",
           "slaveLocate": {
+            "type": "REGION",
             "start": "0x10000000",
-            "end": "0x100FFFFF"
+            "offset": "0x0",
+            "limit": "0x100FFFFF"
           }
         },
         {
           "id": "bb_slave_1",
           "name": "t2s1_bufb",
           "slaveLocate": {
+            "type": "OFFSET",
             "start": "0x10100000",
-            "end": "0x101FFFFF"
+            "offset": "0x0",
+            "limit": "0x101FFFFF"
           }
         },
         {
           "id": "bb_slave_2",
           "name": "t2s1_ddr",
           "slaveLocate": {
+            "type": "OFFSET",
             "start": "0x40000000",
             "offset": "0x20000000",
-            "size": "0x20000000"
+            "limit": "0x20000000"
           }
         }
       ],
@@ -99,8 +109,10 @@
           "masterView": {
             "address": [
               {
+                "type": "REGION",
                 "start": "0x00000000",
-                "end": "0x000FFFFF"
+                "offset": "0x0",
+                "limit": "0x000FFFFF"
               }
             ],
             "bus": "bus_2"
@@ -112,8 +124,10 @@
           "masterView": {
             "address": [
               {
+                "type": "REGION",
                 "start": "0x00100000",
-                "end": "0x001FFFFF"
+                "offset": "0x0",
+                "limit": "0x001FFFFF"
               }
             ],
             "bus": "bus_2"
@@ -125,9 +139,10 @@
           "masterView": {
             "address": [
               {
+                "type": "OFFSET",
                 "start": "0xC0000000",
                 "offset": "0x20000000",
-                "size": "0x20000000"
+                "limit": "0x20000000"
               }
             ],
             "bus": "bus_2"
@@ -139,25 +154,30 @@
           "id": "bb_slave_3",
           "name": "t2s2_bufa",
           "slaveLocate": {
+            "type": "REGION",
             "start": "0x20000000",
-            "end": "0x200FFFFF"
+            "offset": "0x0",
+            "limit": "0x200FFFFF"
           }
         },
         {
           "id": "bb_slave_4",
           "name": "t2s2_bufb",
           "slaveLocate": {
+            "type": "REGION",
             "start": "0x20100000",
-            "end": "0x201FFFFF"
+            "offset": "0x0",
+            "limit": "0x201FFFFF"
           }
         },
         {
           "id": "bb_slave_5",
           "name": "t2s2_ddr",
           "slaveLocate": {
+            "type": "OFFSET",
             "start": "0x60000000",
             "offset": "0x20000000",
-            "size": "0x20000000"
+            "limit": "0x20000000"
           }
         }
       ],
@@ -202,8 +222,10 @@
           "id": "mem_0",
           "name": "top_ddr",
           "slaveLocate": {
+            "type": "REGION",
             "start": "0x80000000",
-            "end": "0xFFFFFFFF"
+            "offset": "0x0",
+            "limit": "0xFFFFFFFF"
           }
         }
       ],
@@ -215,8 +237,10 @@
         "masterView": {
           "address": [
             {
+              "type": "REGION",
               "start": "0x00000000",
-              "end": "0xFFFFFFFF"
+              "offset": "0x0",
+              "limit": "0xFFFFFFFF"
             }
           ],
           "bus": "bus_0"
@@ -252,8 +276,10 @@
           "id": "mem_1",
           "name": "s1_bufa",
           "slaveLocate": {
+            "type": "REGION",
             "start": "0x00000000",
-            "end": "0x000FFFFF"
+            "offset": "0x0",
+            "limit": "0x000FFFFF"
           }
         },
         {
@@ -261,8 +287,10 @@
           "id": "mem_2",
           "name": "s1_bufb",
           "slaveLocate": {
+            "type": "REGION",
             "start": "0x00100000",
-            "end": "0x001FFFFF"
+            "offset": "0x0",
+            "limit": "0x001FFFFF"
           }
         },
         {
@@ -270,8 +298,10 @@
           "id": "mem_3",
           "name": "s1_ddr",
           "slaveLocate": {
+            "type": "REGION",
             "start": "0xC0000000",
-            "end": "0xFFFFFFFF"
+            "offset": "0x0",
+            "limit": "0xFFFFFFFF"
           }
         }
       ],
@@ -283,19 +313,25 @@
           "masterView": {
             "address": [
               {
+                "type": "REGION",
                 "start": "0x000FFFFF",
-                "end": "0x001FFFFF"
+                "offset": "0x0",
+                "limit": "0x001FFFFF"
               },
               {
+                "type": "REGION",
                 "start": "0xC0000000",
-                "end": "0xFFFFFFFF"
+                "offset": "0x0",
+                "limit": "0xFFFFFFFF"
               }
             ],
             "bus": "bus_1"
           },
           "slaveLocate": {
+            "type": "REGION",
             "start": "0x00A00000",
-            "end": "0x00A03FFF"
+            "offset": "0x0",
+            "limit": "0x00A03FFF"
           }
         },
         {
@@ -305,15 +341,19 @@
           "masterView": {
             "address": [
               {
+                "type": "REGION",
                 "start": "0x000FFFFF",
-                "end": "0x001FFFFF"
+                "offset": "0x0",
+                "limit": "0x001FFFFF"
               }
             ],
             "bus": "bus_1"
           },
           "slaveLocate": {
+            "type": "REGION",
             "start": "0x00A04000",
-            "end": "0x00A07FFF"
+            "offset": "0x0",
+            "limit": "0x00A07FFF"
           }
         }
       ],
@@ -324,8 +364,10 @@
         "masterView": {
           "address": [
             {
+              "type": "REGION",
               "start": "0x00000000",
-              "end": "0xFFFFFFFF"
+              "offset": "0x0",
+              "limit": "0xFFFFFFFF"
             }
           ],
           "bus": "bus_1"
@@ -361,8 +403,10 @@
           "id": "mem_4",
           "name": "s2_bufa",
           "slaveLocate": {
+            "type": "REGION",
             "start": "0x00000000",
-            "end": "0x000FFFFF"
+            "offset": "0x0",
+            "limit": "0x000FFFFF"
           }
         },
         {
@@ -370,8 +414,10 @@
           "id": "mem_5",
           "name": "s2_bufb",
           "slaveLocate": {
+            "type": "REGION",
             "start": "0x00100000",
-            "end": "0x001FFFFF"
+            "offset": "0x0",
+            "limit": "0x001FFFFF"
           }
         },
         {
@@ -379,8 +425,10 @@
           "id": "mem_6",
           "name": "s2_ddr",
           "slaveLocate": {
+            "type": "REGION",
             "start": "0xC0000000",
-            "end": "0xFFFFFFFF"
+            "offset": "0x0",
+            "limit": "0xFFFFFFFF"
           }
         }
       ],
@@ -392,19 +440,25 @@
           "masterView": {
             "address": [
               {
+                "type": "REGION",
                 "start": "0x000FFFFF",
-                "end": "0x001FFFFF"
+                "offset": "0x0",
+                "limit": "0x001FFFFF"
               },
               {
+                "type": "REGION",
                 "start": "0xC0000000",
-                "end": "0xFFFFFFFF"
+                "offset": "0x0",
+                "limit": "0xFFFFFFFF"
               }
             ],
             "bus": "bus_2"
           },
           "slaveLocate": {
+            "type": "REGION",
             "start": "0x00A00000",
-            "end": "0x00A03FFF"
+            "offset": "0x0",
+            "limit": "0x00A03FFF"
           }
         },
         {
@@ -414,15 +468,19 @@
           "masterView": {
             "address": [
               {
+                "type": "REGION",
                 "start": "0x000FFFFF",
-                "end": "0x001FFFFF"
+                "offset": "0x0",
+                "limit": "0x001FFFFF"
               }
             ],
             "bus": "bus_2"
           },
           "slaveLocate": {
+            "type": "REGION",
             "start": "0x00A04000",
-            "end": "0x00A07FFF"
+            "offset": "0x0",
+            "limit": "0x00A07FFF"
           }
         }
       ],
@@ -433,8 +491,10 @@
         "masterView": {
           "address": [
             {
+              "type": "REGION",
               "start": "0x00000000",
-              "end": "0xFFFFFFFF"
+              "offset": "0x0",
+              "limit": "0xFFFFFFFF"
             }
           ],
           "bus": "bus_2"

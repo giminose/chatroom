@@ -4,7 +4,6 @@ import { StompSubscription } from '@stomp/stompjs/esm6/stomp-subscription';
 import { Message } from '@stomp/stompjs/esm6/i-message';
 import { BUS } from './shared/bus';
 import { CPU } from './shared/cpu';
-import { AddressRegion } from './shared/address-region';
 import { Device } from './shared/device';
 import { Memory } from './shared/memory';
 import { SingleCpuSystem } from './shared/single-cpu-system';
@@ -13,7 +12,7 @@ import { BusBridgeSlave } from './shared/bus-bridge-slave';
 import { BusBridgeMaster } from './shared/bus-bridge-master';
 import { BusBridge } from './shared/bus-bridge';
 import { BusBridgeMapper } from './shared/bus-bridge-mapper';
-import { AddressOffset } from './shared/address-offset';
+import { Address } from './shared/address';
 
 @Component({
   selector: 'app-root',
@@ -105,14 +104,14 @@ export class AppComponent implements OnInit {
     const s1BUS = new BUS({id: 'bus_1', name: 's1_bus'});
     const s2BUS = new BUS({id: 'bus_2', name: 's2_bus'});
 
-    const arDDR = new AddressRegion({start: '0x00000000', end: '0xFFFFFFFF'}); // 0~4G
-    const arTopDDR   = new AddressRegion({start: '0x80000000', end: '0xFFFFFFFF'}); // 2G~4G
-    const arEngView  = new AddressRegion({start: '0x000FFFFF', end: '0x001FFFFF'}); // 0~2M
-    const arSubBufA  = new AddressRegion({start: '0x00000000', end: '0x000FFFFF'}); // 0M~1M
-    const arSubBufB  = new AddressRegion({start: '0x00100000', end: '0x001FFFFF'}); // 1M~2M
-    const arEngAReg  = new AddressRegion({start: '0x00A00000', end: '0x00A03FFF'}); // 10M~10+16K
-    const arEngBReg  = new AddressRegion({start: '0x00A04000', end: '0x00A07FFF'}); // 10M+16K~10M+32K
-    const arSubDDR   = new AddressRegion({start: '0xC0000000', end: '0xFFFFFFFF'}); // 3G~4G
+    const arDDR = new Address({type: 'REGION', start: '0x00000000', offset: '0x0', limit: '0xFFFFFFFF'}); // 0~4G
+    const arTopDDR   = new Address({type: 'REGION', start: '0x80000000', offset: '0x0', limit: '0xFFFFFFFF'}); // 2G~4G
+    const arEngView  = new Address({type: 'REGION', start: '0x000FFFFF', offset: '0x0', limit: '0x001FFFFF'}); // 0~2M
+    const arSubBufA  = new Address({type: 'REGION', start: '0x00000000', offset: '0x0', limit: '0x000FFFFF'}); // 0M~1M
+    const arSubBufB  = new Address({type: 'REGION', start: '0x00100000', offset: '0x0', limit: '0x001FFFFF'}); // 1M~2M
+    const arEngAReg  = new Address({type: 'REGION', start: '0x00A00000', offset: '0x0', limit: '0x00A03FFF'}); // 10M~10+16K
+    const arEngBReg  = new Address({type: 'REGION', start: '0x00A04000', offset: '0x0', limit: '0x00A07FFF'}); // 10M+16K~10M+32K
+    const arSubDDR   = new Address({type: 'REGION', start: '0xC0000000', offset: '0x0', limit: '0xFFFFFFFF'}); // 3G~4G
 
     const topCPU = new CPU({id: 'cpu_0', name: 'top_cpu', busAddress: new MasterView({bus: topBUS, address: [arDDR]})});
     topBUS.addMaster(topCPU);
@@ -163,13 +162,13 @@ export class AppComponent implements OnInit {
     s2BUS.addMaster(eng2B);
     s2BUS.addSlave(eng2B);
 
-    const arT2S1BufA = new AddressRegion({start: '0x10000000', end: '0x100FFFFF'}); // 256M~257M
-    const arT2S1BufB = new AddressRegion({start: '0x10100000', end: '0x101FFFFF'}); // 257M~258M
-    const arT2S1DDR  = new AddressOffset({start: '0x40000000', offset: '0x20000000', size: '0x20000000'}); // 1G~1.5G
+    const arT2S1BufA = new Address({type: 'REGION', start: '0x10000000', offset: '0x0', limit: '0x100FFFFF'}); // 256M~257M
+    const arT2S1BufB = new Address({type: 'OFFSET', start: '0x10100000', offset: '0x0', limit: '0x101FFFFF'}); // 257M~258M
+    const arT2S1DDR  = new Address({type: 'OFFSET', start: '0x40000000', offset: '0x20000000', limit: '0x20000000'}); // 1G~1.5G
 
-    const arT2S2BufA = new AddressRegion({start: '0x20000000', end: '0x200FFFFF'}); // 512M~513M
-    const arT2S2BufB = new AddressRegion({start: '0x20100000', end: '0x201FFFFF'}); // 513M~514M
-    const arT2S2DDR  = new AddressOffset({start: '0x60000000', offset: '0x20000000', size: '0x20000000'}); // 1.5G~2G
+    const arT2S2BufA = new Address({type: 'REGION', start: '0x20000000', offset: '0x0', limit: '0x200FFFFF'}); // 512M~513M
+    const arT2S2BufB = new Address({type: 'REGION', start: '0x20100000', offset: '0x0', limit: '0x201FFFFF'}); // 513M~514M
+    const arT2S2DDR  = new Address({type: 'OFFSET', start: '0x60000000', offset: '0x20000000', limit: '0x20000000'}); // 1.5G~2G
 
     const t2s1BBSlaveBufA = new BusBridgeSlave({id: 'bb_slave_0', name: 't2s1_bufa', slaveLocate: arT2S1BufA});
     const t2s1BBSlaveBufB = new BusBridgeSlave({id: 'bb_slave_1', name: 't2s1_bufb', slaveLocate: arT2S1BufB});
@@ -186,7 +185,7 @@ export class AppComponent implements OnInit {
       busAddress: new MasterView({bus: s1BUS, address: [arSubBufB]})
     });
     const t2s1BBMaster3 = new BusBridgeMaster({id: 'bb_master_2', name: 't2s1_master3',
-      busAddress: new MasterView({bus: s1BUS, address: [new AddressOffset({start: '0xC0000000', offset: '0x20000000', size: '0x20000000'})]})
+      busAddress: new MasterView({bus: s1BUS, address: [new Address({type: 'OFFSET', start: '0xC0000000', offset: '0x20000000', limit: '0x20000000'})]})
     });
 
     const t2s2BBMaster1 = new BusBridgeMaster({id: 'bb_master_3', name: 't2s2_master4',
@@ -196,7 +195,7 @@ export class AppComponent implements OnInit {
       busAddress: new MasterView({bus: s2BUS, address: [arSubBufB]})
     });
     const t2s2BBMaster3 = new BusBridgeMaster({id: 'bb_master_5', name: 't2s2_master6',
-      busAddress: new MasterView({bus: s2BUS, address: [new AddressOffset({start: '0xC0000000', offset: '0x20000000', size: '0x20000000'})]})
+      busAddress: new MasterView({bus: s2BUS, address: [new Address({type: 'OFFSET', start: '0xC0000000', offset: '0x20000000', limit: '0x20000000'})]})
     });
 
     const t2s1BBMapper1 = new BusBridgeMapper(t2s1BBMaster1, t2s1BBSlaveBufA);
