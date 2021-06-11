@@ -164,11 +164,11 @@ export class AppComponent implements OnInit {
 
     const arT2S1BufA = new Address({type: 'REGION', start: '0x10000000', offset: '0x0', limit: '0x100FFFFF'}); // 256M~257M
     const arT2S1BufB = new Address({type: 'REGION', start: '0x10100000', offset: '0x0', limit: '0x101FFFFF'}); // 257M~258M
-    const arT2S1DDR  = new Address({type: 'OFFSET', start: '0x40000000', offset: '0x20000000', limit: '0x20000000'}); // 1G~1.5G
+    const arT2S1DDR  = new Address({type: 'REGION', start: '0x40000000', offset: '0x0', limit: '0x5FFFFFFF'}); // 1G~1.5G
 
     const arT2S2BufA = new Address({type: 'REGION', start: '0x20000000', offset: '0x0', limit: '0x200FFFFF'}); // 512M~513M
     const arT2S2BufB = new Address({type: 'REGION', start: '0x20100000', offset: '0x0', limit: '0x201FFFFF'}); // 513M~514M
-    const arT2S2DDR  = new Address({type: 'OFFSET', start: '0x60000000', offset: '0x20000000', limit: '0x20000000'}); // 1.5G~2G
+    const arT2S2DDR  = new Address({type: 'REGION', start: '0x60000000', offset: '0x0', limit: '0x7FFFFFFF'}); // 1.5G~2G
 
     const t2s1BBSlaveBufA = new BusBridgeSlave({id: 'bb_slave_0', name: 't2s1_bufa', slaveLocate: arT2S1BufA});
     const t2s1BBSlaveBufB = new BusBridgeSlave({id: 'bb_slave_1', name: 't2s1_bufb', slaveLocate: arT2S1BufB});
