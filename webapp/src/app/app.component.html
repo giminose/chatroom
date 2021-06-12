@@ -1,8 +1,3 @@
-<div style="color: blue; text-align: center">
-  <h1>{{title}}</h1>
-  <h3>{{description}}</h3>
-</div>
-
 <div class="container" style="width: 400px; margin-top: 20px;">
 
   <form class="form-inline">
@@ -16,7 +11,7 @@
   <form class="form-inline" style="margin-top: 20px;">
     <div class="form-group">
       <label for="name">User's Name:</label>
-      <input type="text" id="name" name="name" class="form-control" [(ngModel)]="name" />
+      <input type="text" id="name" name="name" class="form-control" [(ngModel)]="user" />
     </div>
     <button id="send" class="btn btn-default" type="button" (click)="sendName()">Send</button>
   </form>
@@ -24,12 +19,12 @@
   <table id="conversation" class="table table-striped" style="margin-top: 20px;">
     <thead>
       <tr>
-        <th>Greetings</th>
+        <th>UserList</th>
       </tr>
     </thead>
-    <tbody *ngFor="let greeting of greetings">
+    <tbody *ngFor="let user of users">
       <tr>
-        <td>{{greeting}}</td>
+        <td>{{user}}</td>
       </tr>
     </tbody>
   </table>
