@@ -1,4 +1,25 @@
-<div class="container" style="width: 400px; margin-top: 20px;">
+<section class="main-container">
+	<p-toast [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" position="bottom-center" [baseZIndex]=9999></p-toast>
+  <div *ngIf="!joined" class="login-page">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h1><span>Welcom to Chatroom</span></h1>
+        <div class="form-content">
+          <div class="form-group">
+            <input pInputText [(ngModel)]="user" class="form-control input-underline input-lg" type="text" placeholder="Name">
+          </div>
+          <button type="submit" class="btn rounded-btn" (click)="join()"> JOIN </button>&nbsp;
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="joined">
+    <button pButton type="button" label="LEAVE" (click)="leave()" class="p-button-rounded p-button-warning p-button-outlined"></button>
+  </div>
+</section>
+<p-blockUI [blocked]="disabled"></p-blockUI>
+
+<!-- <div class="container" style="width: 400px; margin-top: 20px;">
 
   <form class="form-inline">
     <div class="form-group">
@@ -29,4 +50,4 @@
     </tbody>
   </table>
 
-</div>
+</div> -->

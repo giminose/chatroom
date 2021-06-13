@@ -4,11 +4,14 @@ import com.gizone.chatroom.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Controller
 @RestController
 public class WebsocketController {
 
@@ -19,6 +22,7 @@ public class WebsocketController {
         this.messageService = messageService;
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/users")
     public List<String> getUsers() {
         return messageService.getOnlineUsers();
@@ -39,9 +43,9 @@ public class WebsocketController {
         this.messageService.broadcastMessage(userName, message);
     }
 
-    @MessageMapping("/talk/to/{userName}")
-    public void talkTo(@DestinationVariable String userName, String message) {
-        this.messageService.talkToUser(userName, message);
+    @MessageMapping("/talk/{toUser}/{fromUser}")
+    public void talkTo(@DestinationVariable String toUser, @DestinationVariable String fromUser, String message) {
+        this.messageService.talkToUser(toUser, fromUser, message);
     }
 
 }
