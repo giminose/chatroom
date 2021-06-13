@@ -11,9 +11,9 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class ChatMessage {
 
-    private String message;
-
     private String userName;
+
+    private String message;
 
     private boolean isWhisper;
 

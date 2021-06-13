@@ -43,13 +43,13 @@ public class MessageService {
     public void broadcastMessage(String userName, String message) {
         Timestamp now = new Timestamp(Instant.now().toEpochMilli());
         ChatMessage chatMessage = new ChatMessage(userName, message, false, now);
-        this.template.convertAndSend("/mp/public", message);
+        this.template.convertAndSend("/mp/public", chatMessage);
     }
 
     public void talkToUser(String toUser, String fromUser, String message) {
         Timestamp now = new Timestamp(Instant.now().toEpochMilli());
         ChatMessage chatMessage = new ChatMessage(fromUser, message, true, now);
-        this.template.convertAndSend("/mp/private" + toUser, message);
+        this.template.convertAndSend("/mp/private" + toUser, chatMessage);
     }
 
 }

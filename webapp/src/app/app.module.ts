@@ -10,6 +10,11 @@ import { BlockUIModule}  from 'primeng/blockui';
 import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
+import { DataViewModule } from 'primeng/dataview';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule}  from 'primeng/message';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import { ButtonModule } from 'primeng/button';
     ToastModule,
     InputTextModule,
     BlockUIModule,
-    ButtonModule
+    ButtonModule,
+    TableModule,
+    TooltipModule,
+    DataViewModule,
+    MessageModule,
+    MessagesModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

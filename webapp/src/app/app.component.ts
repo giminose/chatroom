@@ -1,34 +1,76 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Client } from '@stomp/stompjs/esm6/client';
 import { StompSubscription } from '@stomp/stompjs/esm6/stomp-subscription';
 import { Message } from '@stomp/stompjs/esm6/i-message';
 import { MessageService } from 'primeng/api';
 import { ChatMessage } from './shared/chat-message';
 import { environment } from '../environments/environment';
-import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { User } from './shared/user';
+import { filter } from 'rxjs/operators'
+import { NavigationEnd, Router  } from '@angular/router';
+import { DataView } from 'primeng/dataview';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private serviceHost = environment.serviceHost;
   private wsHost = environment.wsHost;
 
-  users: string[] = [];
+  users: User[] = [];
   disabled = true;
   joined = false;
-  user: string = '';
+  user: User = new User('Gimme');
   messages: ChatMessage[] = [];
-  blockUsers: string[] = [];
+  message: string = '';
   private client = new Client();
   private welcomSubscription: StompSubscription = new StompSubscription();
   private leaveSubscription: StompSubscription = new StompSubscription();
   private publicSubscription: StompSubscription = new StompSubscription();
   private privateSubscription: StompSubscription = new StompSubscription();
 
-  constructor(private messageService: MessageService, private http: HttpClient) {}
+  @ViewChild('dv')
+  dv!: DataView;
+
+  scrollHeight = '144px';
+
+	@HostListener('window:resize', ['$event'])
+	onResize(event: any) {
+		const height = event.target.innerHeight - 144;
+		this.scrollHeight = `${height}px`;
+	}
+
+  @HostListener("window:beforeunload", ["$event"])
+  unloadHandler(event: Event) {
+    if (this.joined) {
+      this.leave();
+    }
+  }
+
+  constructor(private messageService: MessageService, private http: HttpClient, private router: Router) {
+    this.router.events
+    .pipe(filter((rs): rs is NavigationEnd => rs instanceof NavigationEnd))
+    .subscribe(event => {
+      if (
+        event.id === 1 &&
+        event.url === event.urlAfterRedirects
+      ) {
+        if (!this.joined) {
+          this.getUsers();
+        }
+      }
+    })
+  }
+
+  ngAfterViewInit(): void {
+		setTimeout(() => {
+			const height = window.innerHeight - 144;
+			this.scrollHeight = `${height}px`;
+		}, 50);
+	}
 
   ngOnDestroy(): void {
     this.leave();
@@ -74,10 +116,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   getUsers() {
     this.disabled = true;
-    this.http.get(`${this.serviceHost}/users`).subscribe(
-      (res) => {
+    this.http.get<Array<string>>(`${this.serviceHost}/users`).subscribe(
+      (res: Array<string>) => {
         this.disabled = false;
-        this.users = <string[]>res;
+        this.users = res.map<User>(v => new User(v));
+        this.users = this.users.filter(v => v.name !== this.user.name);
       },
       (err) => {
         this.disabled = false;
@@ -96,51 +139,59 @@ export class AppComponent implements OnInit, OnDestroy {
     console.log(`welcome: ${message.body}`);
     const user = message.body;
     this.getUsers();
-    this.messageService.add({severity:'success', summary:'New Member Joined', detail:`${user} joined the chatroom.`});
+    this.joined = true;
+    if (this.user.name !== user) {
+      this.messageService.add({severity:'success', summary:'Member Joined', detail:`${user} joined the chatroom.`});
+    }
   }
 
   leaveHandler(message: Message) {
     console.log(`leave: ${message.body}`);
     const user = message.body;
-    this.messageService.add({severity:'warn', summary:'Member Left', detail:`${user} left the chatroom.`});
-    this.welcomSubscription.unsubscribe();
-    this.leaveSubscription.unsubscribe();
-    this.publicSubscription.unsubscribe();
-    this.privateSubscription.unsubscribe();
-    this.messages = [];
-    this.joined = false;
+    if (this.user.name !== user) {
+      this.messageService.add({severity:'warn', summary:'Member Left', detail:`${user} leaved the chatroom.`});
+    }
+    if (this.user.name === user) {
+      this.welcomSubscription.unsubscribe();
+      this.leaveSubscription.unsubscribe();
+      this.publicSubscription.unsubscribe();
+      this.privateSubscription.unsubscribe();
+      this.messages = [];
+      this.joined = false;
+    }
     this.getUsers();
   }
 
   publicHandler(message: Message) {
     console.log(`public: ${message}`);
     const chatMessage = new ChatMessage(JSON.parse(message.body));
-    if (this.blockUsers.find(v => v === chatMessage.userName)) {
+    if (this.users.find(v => v.banned && v.name === chatMessage.userName)) {
       return;
     }
     this.messages.push(chatMessage);
+    this.dv.updateTotalRecords()
+    this.message = '';
   }
 
   privateHandler(message: Message) {
     console.log(`private: ${message}`);
     const chatMessage = new ChatMessage(JSON.parse(message.body));
-    if (this.blockUsers.find(v => v === chatMessage.userName)) {
+    if (this.users.find(v => v.banned && v.name === chatMessage.userName)) {
       return;
     }
     this.messages.push(chatMessage);
   }
 
   join() {
-    if (this.user === '' || this.user === null) {
+    if (this.user == null || this.user.name === '') {
       this.messageService.add({severity:'error', summary:'Name empty', detail:`Please tell us who you are!`});
       return;
     }
-    if (this.users.find(v => v === this.user)) {
+    if (this.users.find(v => v.name === this.user.name)) {
       this.messageService.add({severity:'warn', summary:'User existed', detail:`Please choose other user name!`});
       return;
     }
 
-    this.joined = true;
     this.welcomSubscription = this.client.subscribe('/mp/welcome', (message) => this.welcomHandler(message));
     this.leaveSubscription = this.client.subscribe('/mp/leave', (message) => this.leaveHandler(message));
     this.publicSubscription = this.client.subscribe('/mp/public', (message) => this.publicHandler(message));
@@ -148,7 +199,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.client.publish({
       destination: '/chat/join',
-      body: this.user,
+      body: this.user.name,
       headers: { priority: '9' }
     });
   }
@@ -156,32 +207,36 @@ export class AppComponent implements OnInit, OnDestroy {
   leave() {
     this.client.publish({
       destination: '/chat/leave',
-      body: this.user,
+      body: this.user.name,
       headers: { priority: '9' }
     });
   }
 
-  sendMessage(message: string) {
+  sendMessage() {
+    if (this.message === '') {
+      this.messageService.add({severity:'info', summary:'Too Quite', detail: 'Please say something'})
+      return;
+    }
     this.client.publish({
-      destination: `/tell/${this.user}`,
-      body: message,
+      destination: `/chat/tell/${this.user.name}`,
+      body: this.message,
       headers: { priority: '9' }
     });
   }
 
-  sendWhisper(message: string, toUser: string) {
+  sendWhisper(toUser: User) {
     this.client.publish({
-      destination: `/talk/${toUser}/${this.user}`,
-      body: message,
+      destination: `/chat/talk/${toUser.name}/${this.user.name}`,
+      body: this.message,
       headers: { priority: '9' }
     });
   }
 
-  blockUser(user: string) {
-    this.blockUsers.push(user);
+  blockUser(user: User) {
+    user.banned = true;
   }
 
-  unblockUser(user: string) {
-    this.blockUsers = this.blockUsers.filter(v => v !== user);
+  unblockUser(user: User) {
+    user.banned = false;
   }
 }

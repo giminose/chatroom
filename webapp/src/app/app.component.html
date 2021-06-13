@@ -1,53 +1,68 @@
 <section class="main-container">
 	<p-toast [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" position="bottom-center" [baseZIndex]=9999></p-toast>
   <div *ngIf="!joined" class="login-page">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <h1><span>Welcom to Chatroom</span></h1>
-        <div class="form-content">
-          <div class="form-group">
-            <input pInputText [(ngModel)]="user" class="form-control input-underline input-lg" type="text" placeholder="Name">
-          </div>
-          <button type="submit" class="btn rounded-btn" (click)="join()"> JOIN </button>&nbsp;
+    <h1><span>Welcom to Chatroom</span></h1>
+    <div class="form-content">
+      <div class="form-group">
+        <input pInputText [(ngModel)]="user.name" class="form-control input-underline input-lg" type="text" placeholder="Name">
+      </div>
+      <button type="submit" class="btn rounded-btn" (click)="join()"> JOIN </button>&nbsp;
+    </div>
+  </div>
+  <div *ngIf="joined" class="gi-one-page">
+    <div class="p-grid" style="height: 100vh;">
+      <div class="p-col">
+        <p-dataView #dv [value]="messages" layout="list">
+          <ng-template pTemplate="header">
+            <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+              <input type="text" pInputText [(ngModel)]="message" style='width: 100%;' class="p-inputtext-lg">&nbsp;
+              <button pButton pRipple type="button" (click)="sendMessage()" icon="pi pi-volume-up" iconPos="right" class="p-button-info"></button>
+            </div>
+          </ng-template>
+          <ng-template let-msg pTemplate="listItem">
+            <div class="p-col-12">
+              <p-messages severity="info">
+                <ng-template pTemplate>
+                    <div style="width: 100%; display: inline;">
+                      <div style="float:left">{{msg.userName}}: {{msg.message}}</div>
+                      <div style="float:right">{{msg.createTime | date:'h:mm:ss a'}}</div>
+                    </div>
+                </ng-template>
+              </p-messages>
+            </div>
+          </ng-template>
+        </p-dataView>
+      </div>
+      <div class="p-col-fixed" style="width:300px">
+        <div>
+          <p-table [value]="users" [scrollable]="true" [scrollHeight]="scrollHeight">
+            <ng-template pTemplate="header">
+              <tr>
+                <th><h4>{{user.name}}</h4></th>
+                <th [style.width]="'125px'">
+                  <button pButton pRipple type="button" label="LEAVE" (click)="leave()" icon="pi pi-sign-out" iconPos="right" class="p-button-rounded p-button-warning"></button>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-u>
+              <tr>
+                  <td>{{u.name}}</td>
+                  <td>
+                    <span *ngIf="u.name===user.name">
+                      <button pButton pRipple type="button" label="LEAVE" (click)="leave()" icon="pi pi-sign-out" iconPos="right" class="p-button-rounded p-button-warning"></button>
+                    </span>
+                    <span *ngIf="u.name!==user.name">
+                      <button pButton pRipple type="button" icon="pi pi-comment" (click)="sendWhisper(u)" pTooltip="whisper" class="p-button-rounded p-button-info"></button>&nbsp;
+                      <button *ngIf="!u.banned" pButton pRipple type="button" icon="pi pi-lock-open" (click)="blockUser(u)" pTooltip="block" class="p-button-rounded p-button-success"></button>
+                      <button *ngIf="u.banned" pButton pRipple type="button" icon="pi pi-lock" (click)="unblockUser(u)" pTooltip="unblock" class="p-button-rounded p-button-danger"></button>
+                    </span>
+                  </td>
+              </tr>
+            </ng-template>
+          </p-table>
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="joined">
-    <button pButton type="button" label="LEAVE" (click)="leave()" class="p-button-rounded p-button-warning p-button-outlined"></button>
-  </div>
 </section>
 <p-blockUI [blocked]="disabled"></p-blockUI>
-
-<!-- <div class="container" style="width: 400px; margin-top: 20px;">
-
-  <form class="form-inline">
-    <div class="form-group">
-      <label for="connect">Make Connection:</label>
-      <button id="connect" class="btn btn-default" type="button" [disabled]="!disabled" (click)="connect()">Connect</button>
-      <button id="disconnect" class="btn btn-default" type="submit" [disabled]="disabled" (click)="disconnect()">Disconnect</button>
-    </div>
-  </form>
-
-  <form class="form-inline" style="margin-top: 20px;">
-    <div class="form-group">
-      <label for="name">User's Name:</label>
-      <input type="text" id="name" name="name" class="form-control" [(ngModel)]="user" />
-    </div>
-    <button id="send" class="btn btn-default" type="button" (click)="sendName()">Send</button>
-  </form>
-
-  <table id="conversation" class="table table-striped" style="margin-top: 20px;">
-    <thead>
-      <tr>
-        <th>UserList</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let user of users">
-      <tr>
-        <td>{{user}}</td>
-      </tr>
-    </tbody>
-  </table>
-
-</div> -->
