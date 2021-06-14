@@ -15,7 +15,7 @@ public class ChatMessage {
 
     private String message;
 
-    private boolean isWhisper;
+    private Boolean isWhisper;
 
     private Timestamp createTime;
 }

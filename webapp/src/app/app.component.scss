@@ -1,3 +1,48 @@
+.message {
+  font-size: 18px;
+  font-weight:500;
+  border: 1px solid #dedede;
+  background-color: rgba(85, 228,168, 1);
+  // color:rgb(0, 0, 0);
+  border-radius: 12px;
+  padding: 10px;
+  // margin: 10px 0;
+}
+.darker {
+  border-color: #ccc;
+  background-color: rgba(111, 25, 182, 1);
+  color:white;
+}
+.message::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.timeStampRight {
+  float: right;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+.timeStampLeft {
+  float: left;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+}
+
+.message-content {
+  position: absolute;
+	top: 70px;
+	bottom: 10px;
+	left: 10px;
+	right: 310px;
+  padding: 10px;
+  overflow-x: hidden;
+	overflow-y: auto;
+	background: rgba(40, 40, 40, 1);
+  border-radius: 12px;
+}
+
 .main-container{
 	position: fixed;
 	top: 0;

@@ -12,9 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
-import { DataViewModule } from 'primeng/dataview';
-import { MessagesModule } from 'primeng/messages';
-import { MessageModule}  from 'primeng/message';
+import { TagModule } from 'primeng/tag'
 
 @NgModule({
   declarations: [
@@ -32,9 +30,7 @@ import { MessageModule}  from 'primeng/message';
     ButtonModule,
     TableModule,
     TooltipModule,
-    DataViewModule,
-    MessageModule,
-    MessagesModule
+    TagModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

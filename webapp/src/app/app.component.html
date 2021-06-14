@@ -12,26 +12,22 @@
   <div *ngIf="joined" class="gi-one-page">
     <div class="p-grid" style="height: 100vh;">
       <div class="p-col">
-        <p-dataView #dv [value]="messages" layout="list">
-          <ng-template pTemplate="header">
-            <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
-              <input type="text" pInputText [(ngModel)]="message" style='width: 100%;' class="p-inputtext-lg">&nbsp;
-              <button pButton pRipple type="button" (click)="sendMessage()" icon="pi pi-volume-up" iconPos="right" class="p-button-info"></button>
+        <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+          <input type="text" pInputText [(ngModel)]="message" style='width: 100%;' class="p-inputtext-lg">&nbsp;
+          <button pButton pRipple type="button" (click)="sendMessage()" icon="pi pi-volume-up" iconPos="right" class="p-button-info"></button>
+        </div>
+        <div class="message-content">
+          <div *ngFor="let msg of messages.slice().reverse()" class="p-d-flex p-flex-column">
+            <div class="p-mb-2 message" [ngClass]="msg.userName===user.name ? 'p-as-end':'darker p-as-start'">
+              <div class='p-d-inline-flex'>
+                <p-tag styleClass="p-mr-2" icon="pi pi-user" [severity]="msg.userName===user.name ? 'success': 'info'" [value]="msg.userName" [rounded]="true"></p-tag>
+                <p-tag *ngIf="msg.isWhisper" styleClass="p-mr-2" icon="pi pi-envelope" severity="warning" [rounded]="true"></p-tag>
+                <div class='p-mr-6'>{{msg.message}}</div>
+                <p-tag styleClass="p-mr-2" icon="pi pi-clock" value="{{msg.createTime | date:'h:mm:ss a'}}" [rounded]="true"></p-tag>
+              </div>
             </div>
-          </ng-template>
-          <ng-template let-msg pTemplate="listItem">
-            <div class="p-col-12">
-              <p-messages severity="info">
-                <ng-template pTemplate>
-                    <div style="width: 100%; display: inline;">
-                      <div style="float:left">{{msg.userName}}: {{msg.message}}</div>
-                      <div style="float:right">{{msg.createTime | date:'h:mm:ss a'}}</div>
-                    </div>
-                </ng-template>
-              </p-messages>
-            </div>
-          </ng-template>
-        </p-dataView>
+          </div>
+        </div>
       </div>
       <div class="p-col-fixed" style="width:300px">
         <div>

@@ -49,7 +49,8 @@ public class MessageService {
     public void talkToUser(String toUser, String fromUser, String message) {
         Timestamp now = new Timestamp(Instant.now().toEpochMilli());
         ChatMessage chatMessage = new ChatMessage(fromUser, message, true, now);
-        this.template.convertAndSend("/mp/private" + toUser, chatMessage);
+        this.template.convertAndSend("/mp/private/" + fromUser, chatMessage);
+        this.template.convertAndSend("/mp/private/" + toUser, chatMessage);
     }
 
 }

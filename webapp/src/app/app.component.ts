@@ -7,9 +7,6 @@ import { ChatMessage } from './shared/chat-message';
 import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { User } from './shared/user';
-import { filter } from 'rxjs/operators'
-import { NavigationEnd, Router  } from '@angular/router';
-import { DataView } from 'primeng/dataview';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -23,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   users: User[] = [];
   disabled = true;
   joined = false;
-  user: User = new User('Gimme');
+  user: User = new User('');
   messages: ChatMessage[] = [];
   message: string = '';
   private client = new Client();
@@ -31,9 +28,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   private leaveSubscription: StompSubscription = new StompSubscription();
   private publicSubscription: StompSubscription = new StompSubscription();
   private privateSubscription: StompSubscription = new StompSubscription();
-
-  @ViewChild('dv')
-  dv!: DataView;
 
   scrollHeight = '144px';
 
@@ -50,19 +44,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  constructor(private messageService: MessageService, private http: HttpClient, private router: Router) {
-    this.router.events
-    .pipe(filter((rs): rs is NavigationEnd => rs instanceof NavigationEnd))
-    .subscribe(event => {
-      if (
-        event.id === 1 &&
-        event.url === event.urlAfterRedirects
-      ) {
-        if (!this.joined) {
-          this.getUsers();
-        }
-      }
-    })
+  constructor(private messageService: MessageService, private http: HttpClient) {
   }
 
   ngAfterViewInit(): void {
@@ -142,6 +124,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.joined = true;
     if (this.user.name !== user) {
       this.messageService.add({severity:'success', summary:'Member Joined', detail:`${user} joined the chatroom.`});
+    } else {
+      this.messageService.add({severity:'success', summary:'Wlecom', detail:`Hi, ${user}!`});
     }
   }
 
@@ -169,7 +153,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
     this.messages.push(chatMessage);
-    this.dv.updateTotalRecords()
     this.message = '';
   }
 
@@ -187,21 +170,31 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       this.messageService.add({severity:'error', summary:'Name empty', detail:`Please tell us who you are!`});
       return;
     }
-    if (this.users.find(v => v.name === this.user.name)) {
-      this.messageService.add({severity:'warn', summary:'User existed', detail:`Please choose other user name!`});
-      return;
-    }
 
-    this.welcomSubscription = this.client.subscribe('/mp/welcome', (message) => this.welcomHandler(message));
-    this.leaveSubscription = this.client.subscribe('/mp/leave', (message) => this.leaveHandler(message));
-    this.publicSubscription = this.client.subscribe('/mp/public', (message) => this.publicHandler(message));
-    this.privateSubscription = this.client.subscribe('/mp/private', (message) => this.privateHandler(message));
+    this.http.get<Array<string>>(`${this.serviceHost}/users`).subscribe(
+      (res: Array<string>) => {
+        this.disabled = false;
+        if (res.find(v => v === this.user.name)) {
+          this.messageService.add({severity:'warn', summary:'User existed', detail:`Please choose other user name!`});
+          return;
+        }
 
-    this.client.publish({
-      destination: '/chat/join',
-      body: this.user.name,
-      headers: { priority: '9' }
-    });
+        this.welcomSubscription = this.client.subscribe('/mp/welcome', (message) => this.welcomHandler(message));
+        this.leaveSubscription = this.client.subscribe('/mp/leave', (message) => this.leaveHandler(message));
+        this.publicSubscription = this.client.subscribe('/mp/public', (message) => this.publicHandler(message));
+        this.privateSubscription = this.client.subscribe(`/mp/private/${this.user.name}`, (message) => this.privateHandler(message));
+
+        this.client.publish({
+          destination: '/chat/join',
+          body: this.user.name,
+          headers: { priority: '9' }
+        });
+      },
+      (err) => {
+        this.disabled = false;
+        this.messageService.add({severity:'error', summary:'Get Users Error', detail:`${err}`});
+      }
+    );
   }
 
   leave() {
