@@ -1,28 +1,28 @@
 import { BusBridgeMapper } from "./bus-bridge-mapper";
-import { BusBridgeMaster } from "./bus-bridge-master";
-import { BusBridgeSlave } from "./bus-bridge-slave";
-import { Hardware } from "./hardware";
+import { Port } from "./port";
 
-export class BusBridge implements Hardware {
-  type: string = 'BUS_BRIDGE';
+export class BusBridge {
+  type = 'BUSBRIDGE'
   id: string;
   name: string;
-  masters: BusBridgeMaster[];
-  slaves: BusBridgeSlave[];
-  mapper: BusBridgeMapper[];
+  outMasterPorts: string[] = [];
+  inSlavePorts: string[] = [];
+  mapper: BusBridgeMapper[] = [];
 
   constructor(options: {
     id: string;
     name: string;
-    masters: BusBridgeMaster[];
-    slaves: BusBridgeSlave[];
-    mapper: BusBridgeMapper[];
+    masterPorts: Port[];
+    slavePorts: Port[];
   }) {
     this.id = options.id;
     this.name = options.name;
-    this.masters = options.masters;
-    this.slaves = options.slaves;
-    this.mapper = options.mapper;
+    options.masterPorts.forEach(m => {
+      this.outMasterPorts.push(m.id);
+    });
+    options.slavePorts.forEach(m => {
+      this.inSlavePorts.push(m.id);
+    });
   }
 
 }

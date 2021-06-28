@@ -1,11 +1,11 @@
-import { Hardware } from "./hardware";
-
-export class BUS implements Hardware {
-  type: string = 'BUS';
+import { Port } from "./port";
+export class BUS {
+  type = 'BUS';
   id: string;
   name: string;
-  masters: string[] = [];
-  slaves: string[] = [];
+  masterPorts: string[] = [];
+  slavePorts: string[] = [];
+
   constructor(options: {
     id: string;
     name: string;
@@ -14,15 +14,21 @@ export class BUS implements Hardware {
     this.name = options.name;
   }
 
-  addMaster(hw: Hardware) {
-    if (!this.masters.find(v => v == hw.id)) {
-      this.masters.push(hw.id);
+  getAllPorts() {
+    return this.masterPorts.concat(this.slavePorts);
+  }
+
+  addMasterPort(port: Port, allPort: Port[]) {
+    if (!this.masterPorts.find(v => v == port.id)) {
+      this.masterPorts.push(port.id);
+      allPort.push(port);
     }
   }
 
-  addSlave(hw: Hardware) {
-    if (!this.slaves.find(v => v == hw.id)) {
-      this.slaves.push(hw.id);
+  addSlavePort(port: Port, allPort: Port[]) {
+    if (!this.slavePorts.find(v => v == port.id)) {
+      this.slavePorts.push(port.id);
+      allPort.push(port);
     }
   }
 }

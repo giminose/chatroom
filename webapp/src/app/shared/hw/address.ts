@@ -1,18 +1,15 @@
 export class Address {
-  type: 'OFFSET' | 'REGION';
   start: string;
   offset: string;
-  limit: string;
+  end: string;
 
   constructor(options: {
-    type: 'OFFSET' | 'REGION';
     start: string;
     offset: string;
-    limit: string;
+    end: string;
   }) {
-    this.type = options.type;
     this.start = options.start;
     this.offset = options.offset;
-    this.limit = options.limit;
+    this.end = options.end;
   }
 }

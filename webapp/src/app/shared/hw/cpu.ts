@@ -1,18 +1,21 @@
-import { MasterView } from "./master-view";
-import { Hardware } from "./hardware";
-export class CPU implements Hardware{
+import { Port } from "./port";
+export class CPU {
   type = 'CPU';
   id: string;
   name: string;
-  masterView: MasterView;
+  ports: string[] = [];
 
   constructor(options: {
     id: string;
     name: string;
-    busAddress: MasterView
+    ports: Port[];
   }) {
     this.id = options.id;
-    this.name = options.name
-    this.masterView = options.busAddress;
+    this.name = options.name;
+    options.ports.forEach(p => {
+      if (!this.ports.find(v => v == p.id)) {
+        this.ports.push(p.id);
+      }
+    })
   }
 }

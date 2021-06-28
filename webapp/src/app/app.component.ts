@@ -7,6 +7,7 @@ import { ChatMessage } from './shared/chat-message';
 import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { User } from './shared/user';
+import { HwService } from './shared/hw/hw.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,8 +18,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   private serviceHost = environment.serviceHost;
   private wsHost = environment.wsHost;
 
+  qq: string = '';
+
   users: User[] = [];
-  disabled = true;
+  disabled = false;
   joined = false;
   user: User = new User('');
   messages: ChatMessage[] = [];
@@ -44,7 +47,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  constructor(private messageService: MessageService, private http: HttpClient) {
+  constructor(private messageService: MessageService, private http: HttpClient, private hwService: HwService) {
+    this.qq = hwService.generateComponent();
   }
 
   ngAfterViewInit(): void {
@@ -93,7 +97,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       console.log('Additional details: ' + frame.body);
     };
 
-    this.client.activate();
+    // this.client.activate();
   }
 
   getUsers() {

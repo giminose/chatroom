@@ -1,12 +1,22 @@
-import { BusBridgeMaster } from "./bus-bridge-master";
-import { BusBridgeSlave } from "./bus-bridge-slave";
+import { Address } from "./address";
+import { Port } from "./port";
 
 export class BusBridgeMapper {
-  master: string;
-  slave: string;
+  outMasterPort: string ;
+  inSlavePorts: string;
+  reqAddr: Address;
+  resAddr: Address;
 
-  constructor(master: BusBridgeMaster, slave: BusBridgeSlave) {
-    this.master = master.id;
-    this.slave = slave.id;
+  constructor(options: {
+    masterPort: Port;
+    slavePort: Port;
+    reqAddr: Address;
+    resAddr: Address;
+  }) {
+    this.outMasterPort = options.masterPort.id;
+    this.inSlavePorts = options.slavePort.id;
+    this.reqAddr = options.reqAddr;
+    this.resAddr = options.resAddr;
   }
+
 }

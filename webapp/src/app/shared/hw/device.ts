@@ -1,27 +1,28 @@
-import { MasterView } from "./master-view";
-import { Hardware } from "./hardware";
-import { Address } from "./address";
-
-export class Device implements Hardware {
+import { Port } from "./port";
+export class Device {
   type = 'DEVICE'
   id: string;
   name: string;
-  masterView?: MasterView;
-  slaveLocate?: Address;
+  masterPorts: string[] = [];
+  slavePorts: string[] = [];
 
   constructor(options: {
     id: string;
     name: string;
-    masterView?: MasterView;
-    slaveLocate?: Address;
+    masterPorts: Port[],
+    slavePorts: Port[]
   }) {
     this.id = options.id;
     this.name = options.name;
-    if (options.masterView != null) {
-      this.masterView = options.masterView;
-    }
-    if (options.slaveLocate != null) {
-      this.slaveLocate = options.slaveLocate;
-    }
+    options.masterPorts.forEach(m => {
+      if (!this.masterPorts.find(v => v == m.id)) {
+        this.masterPorts.push(m.id);
+      }
+    })
+    options.slavePorts.forEach(s => {
+      if (!this.slavePorts.find(v => v == s.id)) {
+        this.slavePorts.push(s.id);
+      }
+    })
   }
 }

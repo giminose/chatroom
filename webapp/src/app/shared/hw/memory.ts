@@ -1,18 +1,25 @@
 import { Address } from "./address";
-import { Hardware } from "./hardware";
-
-export class Memory implements Hardware {
-  type: string = 'MEMORY';
+import { MemMapper } from "./mem-mapper";
+import { Port } from "./port";
+export class Memory {
+  type = 'MEMORY';
   id: string;
   name: string;
-  slaveLocate: Address;
+  physical: Address;
+  mapper: MemMapper[] = [];
   constructor(options: {
     id: string;
     name: string;
-    slaveLocate: Address;
+    physical: Address;
   }) {
     this.id = options.id;
     this.name = options.name;
-    this.slaveLocate = options.slaveLocate;
+    this.physical = options.physical;
   }
+
+  addMapper(req: Address, res: Address) {
+    const memMapper = new MemMapper(req, res);
+    this.mapper.push(memMapper);
+  }
+
 }
