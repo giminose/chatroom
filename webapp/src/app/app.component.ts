@@ -48,7 +48,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   constructor(private messageService: MessageService, private http: HttpClient, private hwService: HwService) {
-    this.qq = hwService.generateComponent();
+    // this.qq = hwService.generateComponent();
   }
 
   ngAfterViewInit(): void {
