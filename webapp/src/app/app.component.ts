@@ -7,7 +7,6 @@ import { ChatMessage } from './shared/chat-message';
 import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { User } from './shared/user';
-import { HwService } from './shared/hw/hw.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -47,8 +46,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  constructor(private messageService: MessageService, private http: HttpClient, private hwService: HwService) {
-    // this.qq = hwService.generateComponent();
+  constructor(private messageService: MessageService, private http: HttpClient) {
   }
 
   ngAfterViewInit(): void {

@@ -13,7 +13,6 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { TagModule } from 'primeng/tag'
-import { HwService } from './shared/hw/hw.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,7 @@ import { HwService } from './shared/hw/hw.service';
     TooltipModule,
     TagModule
   ],
-  providers: [MessageService, HwService],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
